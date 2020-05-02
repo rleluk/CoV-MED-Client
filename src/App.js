@@ -1,26 +1,23 @@
 import React from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggleOn: true};
-  
-    this.handleClick = this.handleClick.bind(this);
-  }
+// pages
+import HomePage from "./pages/HomePage"
+import SignInPage from "./pages/SignInPage"
+import SignUpPage from "./pages/SignUpPage"
+import NotFoundPage from "./pages/404"
 
-  handleClick() {
-    this.setState(state => ({
-      isToggleOn: !state.isToggleOn
-    }));
-  }
-
-  
+class App extends React.PureComponent {
   render() {
-    return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
-      </button>
-    );
+    return <BrowserRouter>
+      <Switch>
+        <Route exact={true} path="/" component={HomePage}/>
+        <Route exact={true} path="/signin" component={SignInPage}/>
+        <Route exact={true} path="/signup" component={SignUpPage}/>
+        <Route exact={true} path="/404/" component={NotFoundPage}></Route>
+        <Redirect to="/404"/>
+      </Switch>
+    </BrowserRouter>;
   }
 }
 

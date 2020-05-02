@@ -1,6 +1,6 @@
 import React from "react";
 
-export class Form extends React.PureComponent {
+export class Alert extends React.PureComponent {
     constructor() {
         super();
     }
