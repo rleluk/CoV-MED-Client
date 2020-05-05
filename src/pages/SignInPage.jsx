@@ -20,13 +20,14 @@ export default class SignInPage extends React.PureComponent {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(process.env.REACT_APP_SERVER);
 
         const dataToSend = {
             username: this.state.username,
             password: this.state.password
         };
 
-        fetch("https://cov-med-server.herokuapp.com/users/authenticate", {
+        fetch(process.env.REACT_APP_SERVER + "/users/authenticate", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
