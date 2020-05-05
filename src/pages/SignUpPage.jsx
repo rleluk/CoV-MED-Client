@@ -30,7 +30,7 @@ export default class SignUpPage extends React.PureComponent {
             lastName: this.state.lastName
         };
 
-        fetch("https://cov-med.herokuapp.com/users/register", {
+        fetch("https://cov-med-service.herokuapp.com/register", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

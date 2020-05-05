@@ -26,7 +26,7 @@ export default class SignInPage extends React.PureComponent {
             password: this.state.password
         };
 
-        fetch("https://cov-med.herokuapp.com/users/authenticate", {
+        fetch("https://cov-med-service.herokuapp.com/authenticate", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
