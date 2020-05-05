@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class SignUpPage extends React.PureComponent {
+export class SignUpPage extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,7 +30,7 @@ export default class SignUpPage extends React.PureComponent {
             lastName: this.state.lastName
         };
 
-        fetch(process.env.REACT_APP_SERVER + "/users/register", {
+        fetch(process.env.REACT_APP_SERVER + "/clients/register", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

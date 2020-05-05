@@ -1,8 +1,14 @@
 import React from "react";
+import { authenticationService } from "../_services/authentication.service";
 
-export default class SignInPage extends React.PureComponent {
+export class SignInPage extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        if (authenticationService.currentUserValue) { 
+            this.props.history.push('/users/homepage');
+        }
+
         this.state = {
             username: "",
             password: ""
@@ -20,24 +26,10 @@ export default class SignInPage extends React.PureComponent {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(process.env.REACT_APP_SERVER);
-
-        const dataToSend = {
-            username: this.state.username,
-            password: this.state.password
-        };
-
-        fetch(process.env.REACT_APP_SERVER + "/users/authenticate", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataToSend)
-        })
-            .then(res => res.json())
-            .then(json => {
-                console.log(json);
-            });
+        authenticationService.login(this.state.username, this.state.password);
+        if (authenticationService.currentUserValue) { 
+            this.props.history.push('/users/homepage');
+        }
     }
 
     render() {
