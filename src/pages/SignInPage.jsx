@@ -81,8 +81,8 @@ export class SignInPage extends React.PureComponent {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input type='text' name='username' onChange={this.handleChange}/>
-                <input type='password' name='password' onChange={this.handleChange}/>
+                <input type='text' name='username' onChange={this.handleChange} required/>
+                <input type='password' name='password' onChange={this.handleChange} required/>
                 <button type='submit'>Sign In</button>
             </form>
         );

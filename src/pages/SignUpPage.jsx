@@ -47,13 +47,13 @@ export class SignUpPage extends React.PureComponent {
         return (
             <form onSubmit={this.handleSubmit}>
                 <label> Username: </label>
-                <input type='text' name='username' onChange={this.handleChange}/>
+                <input type='text' name='username' onChange={this.handleChange} required/>
                 <label> Password: </label>
-                <input type='password' name='password' onChange={this.handleChange}/>
+                <input type='password' name='password' onChange={this.handleChange} required/>
                 <label> First name: </label>
-                <input type='text' name='firstName' onChange={this.handleChange}/>
+                <input type='text' name='firstName' onChange={this.handleChange} required/>
                 <label> Last name: </label>
-                <input type='text' name='lastName' onChange={this.handleChange}/>
+                <input type='text' name='lastName' onChange={this.handleChange} required/>
                 <button type='submit'>Sign Up</button>
             </form>
         );
