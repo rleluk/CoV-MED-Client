@@ -1,14 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Header } from "../_components/Header";
+import { SideMenu } from "../_components/SideMenu";
+import "../styles/HomePage.scss";
 
 export class HomePage extends React.PureComponent {
     render() {
+        const buttons = {
+            Rejestracja: { url: "/signup" },
+            Logowanie: { url: "/signin" }
+        }
+
+        const urls = {
+            "Strona główna": { url: "/" },
+            "Lekarze": { url: "/doctors" },
+            "Badania": { url: "/examinations" }
+        }
+
         return (
             <div>
-                <h1>Hi</h1>
-                <Link to="/signin"> Strona logowania </Link>
-                <br/>
-                <Link to="/signup"> Strona rejestracji </Link>
+                <Header buttons={buttons}/>
+                <SideMenu urls={urls}/>
+                <div className="content">
+                    <h1> Aktualności </h1>
+                </div>
             </div>
         );
     }

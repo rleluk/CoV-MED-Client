@@ -1,6 +1,8 @@
 import React from "react";
 import history from "../_services/history.service";
-import { authenticationService } from "../_services/authentication.service"
+import { Header } from "../_components/Header";
+import { SideMenu } from "../_components/SideMenu";
+// import { authenticationService } from "../_services/authentication.service"
 
 export class SignInPage extends React.PureComponent {
     constructor(props) {
@@ -13,7 +15,7 @@ export class SignInPage extends React.PureComponent {
         // }
 
         this.state = {
-            username: "",
+            email: "",
             password: ""
         };
 
@@ -46,9 +48,11 @@ export class SignInPage extends React.PureComponent {
     handleSubmit(event) {
         event.preventDefault();
         const dataToSend = {
-            username: this.state.username,
+            email: this.state.email,
             password: this.state.password
         };
+
+        console.log(dataToSend)
 
         return fetch(process.env.REACT_APP_SERVER + "/users/authenticate", {
             method: "POST",
@@ -67,7 +71,7 @@ export class SignInPage extends React.PureComponent {
                         this.redirectToHomepage(json.userType);
                         break;
                     case 400:
-                        console.log("Wrong username or password.");
+                        console.log("Wrong email or password.");
                         break;
                     default:
                         throw new Error(res.error);
@@ -79,12 +83,30 @@ export class SignInPage extends React.PureComponent {
     }
 
     render() {
+        const buttons = {
+            Rejestracja: { url: "/signup" },
+        }
+
+        const urls = {
+            "Strona główna": { url: "/" },
+            "Lekarze": { url: "/doctors" },
+            "Badania": { url: "/examinations" }
+        }
+        
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input type='text' name='username' onChange={this.handleChange} required/>
-                <input type='password' name='password' onChange={this.handleChange} required/>
-                <button type='submit'>Sign In</button>
-            </form>
+            <div>
+                <Header buttons={buttons}/>
+                <SideMenu urls={urls}/>
+                <div className="content">
+                    <form onSubmit={this.handleSubmit}>
+                        <label> Email: </label>
+                        <input type='text' name='email' onChange={this.handleChange} required/>
+                        <label> Hasło: </label>
+                        <input type='password' name='password' onChange={this.handleChange} required/>
+                        <button type='submit'>Sign In</button>
+                    </form>    
+                </div>
+            </div>
         );
     }
 };
