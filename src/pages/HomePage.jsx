@@ -21,7 +21,7 @@ export class HomePage extends React.PureComponent {
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
                 <div className="content">
-                    <h1> Aktualności </h1>
+                    Aktualności
                 </div>
             </div>
         );
