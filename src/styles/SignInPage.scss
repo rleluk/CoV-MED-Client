@@ -1,7 +1,9 @@
 @import "BasePage";
 
 .content {
+    height: calc(100% - 100px);
+    margin-left: 20%;
     input {
-        float: left;
+        display: block;
     }
 }

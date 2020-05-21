@@ -1,18 +1,16 @@
 import React from "react";
-import history from "../_services/history.service";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-// import { authenticationService } from "../_services/authentication.service"
+import { authenticationService } from "../_services/authentication.service"
+import "../styles/SignInPage.scss";
 
 export class SignInPage extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        // if(localStorage.getItem("authToken") && localStorage.getItem("userType")) {
-        //     this.redirectToHomepage(localStorage.getItem("userType"));
-        // } else {
-        //     authenticationService.logout();
-        // }
+        if(authenticationService.checkAuthorization()) {
+            authenticationService.redirectToHomepage(localStorage.getItem("userType"));
+        } 
 
         this.state = {
             email: "",
@@ -21,22 +19,6 @@ export class SignInPage extends React.PureComponent {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-    }
- 
-    redirectToHomepage(userType) {
-        switch(userType) {
-            case "Client": 
-                history.push("/clients/homepage");
-                break;
-            case "Receptionist":
-                history.push("/receptionists/homepage");
-                break;
-            case "Doctor":
-                history.push("/doctors/homepage");
-                break;
-            default:
-                throw new Error("Undefined user type.");
-        }
     }
 
     handleChange(event) {
@@ -68,7 +50,7 @@ export class SignInPage extends React.PureComponent {
                         console.log(json);
                         localStorage.setItem('authToken', json.token);
                         localStorage.setItem('userType', json.userType);
-                        this.redirectToHomepage(json.userType);
+                        authenticationService.redirectToHomepage(json.userType);
                         break;
                     case 400:
                         console.log("Wrong email or password.");

@@ -1,27 +1,25 @@
 import React from "react";
+import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-import "../styles/HomePage.scss";
+import { authenticationService } from "../_services/authentication.service";
 
-export class HomePage extends React.PureComponent {
+export class ClientHomePage extends React.PureComponent {
     render() {
         const buttons = {
-            Rejestracja: { url: "/signup" },
-            Logowanie: { url: "/signin" }
+            Wyloguj: { 
+                action: authenticationService.logout 
+            }
         }
 
-        const urls = {
-            "Strona główna": { url: "/" },
-            "Lekarze": { url: "/doctors" },
-            "Badania": { url: "/examinations" }
-        }
+        const urls = URL.client;
 
         return (
             <div>
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
                 <div className="content">
-                    Aktualności
+                    strona domowa [client]
                 </div>
             </div>
         );

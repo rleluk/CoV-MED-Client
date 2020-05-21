@@ -11,11 +11,19 @@ export class Header extends React.PureComponent {
                 <div className="button-wrapper">
                     {
                         Object.keys(buttons).map(key => (
-                            <Link key={key} to={ buttons[key].url }>
-                                <button type="button">
+                            buttons[key].url ? (
+                                <Link key={key} to={ buttons[key].url }>
+                                    <button type="button">
+                                        { key }
+                                    </button>
+                                </Link>
+                            )
+                                :
+                            (
+                                <button key={key} type="button" onClick={buttons[key].action}>
                                     { key }
                                 </button>
-                            </Link>
+                            )
                         ))
                     }
                 </div>   

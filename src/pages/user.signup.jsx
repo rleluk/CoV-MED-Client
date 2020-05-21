@@ -1,10 +1,17 @@
 import React from "react";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
+import { authenticationService } from "../_services/authentication.service"
+import "../styles/SignUpPage.scss";
 
 export class SignUpPage extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        if(authenticationService.checkAuthorization()) {
+            authenticationService.redirectToHomepage(localStorage.getItem("userType"));
+        } 
+        
         this.state = {
             email: "",
             password: "",
