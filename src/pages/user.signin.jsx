@@ -2,7 +2,6 @@ import React from "react";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
 import { authenticationService } from "../_services/authentication.service"
-import "../styles/SignInPage.scss";
 
 export class SignInPage extends React.PureComponent {
     constructor(props) {
@@ -79,7 +78,7 @@ export class SignInPage extends React.PureComponent {
             <div>
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
-                <div className="content">
+                <div className="content-with-margin">
                     <form onSubmit={this.handleSubmit}>
                         <label> Email: </label>
                         <input type='text' name='email' onChange={this.handleChange} required/>

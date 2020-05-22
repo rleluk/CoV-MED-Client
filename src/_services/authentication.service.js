@@ -20,13 +20,13 @@ function checkAuthorization() {
 function redirectToHomepage(userType) {
     switch(userType) {
         case "Client": 
-            history.push("/clients/homepage");
+            history.push("/client/homepage");
             break;
         case "Receptionist":
-            history.push("/receptionists/homepage");
+            history.push("/receptionist/homepage");
             break;
         case "Doctor":
-            history.push("/doctors/homepage");
+            history.push("/doctor/homepage");
             break;
         default:
             throw new Error("Undefined user type.");

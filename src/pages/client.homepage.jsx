@@ -18,7 +18,7 @@ export class ClientHomePage extends React.PureComponent {
             <div>
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
-                <div className="content">
+                <div className="content-with-margin">
                     strona domowa [client]
                 </div>
             </div>

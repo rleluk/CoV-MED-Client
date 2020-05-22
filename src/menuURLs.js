@@ -3,26 +3,29 @@ export const URL = {
         "Strona główna": { url: "/" },
         "Lekarze": { url: "/doctors" },
         "Badania": { url: "/examinations" },
-        "Umów e-wizytę": { url: "/clients/new-appointment" },
-        "Odbyj e-wizytę": { url: "/clients/appointment" },
-        "Historia leczenia": { url: "/clients/examination-history" },
-        "Wyniki badań": { url: "/clients/examination-results" }
+        "Panel pacjenta": { url: "/client/homepage" },
+        "Umów e-wizytę": { url: "/client/new-appointment" },
+        "Odbyj e-wizytę": { url: "/client/appointment" },
+        "Historia leczenia": { url: "/client/examination-history" },
+        "Wyniki badań": { url: "/client/examination-results" }
     },
 
     doctor: {
         "Strona główna": { url: "/" },
         "Lekarze": { url: "/doctors" },
         "Badania": { url: "/examinations" },
-        "E-wizyty": { url: "/doctors/appointments" },
-        "Pacjenci": { url: "/doctors/patients" }
+        "Panel doktora": { url: "/doctor/homepage" },
+        "E-wizyty": { url: "/doctor/appointments" },
+        "Pacjenci": { url: "/doctor/patients" }
     },
 
     receptionist: {
         "Strona główna": { url: "/" },
         "Lekarze": { url: "/doctors" },
         "Badania": { url: "/examinations" },
-        "E-wizyty": { url: "/receptionists/appointments" },
-        "Pacjenci": { url: "/receptionists/patients" }
+        "Panel recepcjonisty": { url: "/receptionist/homepage" },
+        "E-wizyty": { url: "/receptionist/appointments" },
+        "Pacjenci": { url: "/receptionist/patients" }
     },
 
     default: {

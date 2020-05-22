@@ -2,6 +2,7 @@ import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute } from "./_components/PrivateRoute";
 import history from "./_services/history.service";
+import "./styles/BasePage.scss";
 
 import { 
   HomePage, 
@@ -33,17 +34,17 @@ class App extends React.PureComponent {
         <Route exact={true} path="/signin" component={SignInPage}/>
         <Route exact={true} path="/signup" component={SignUpPage}/>
         <Route exact={true} path="/404/" component={NotFoundPage}/>
-        <PrivateRoute exact={true} path="/clients/homepage" component={ClientHomePage}/>
-        <PrivateRoute exact={true} path="/clients/new-appointment" component={NewAppointmentPage}/>
-        <PrivateRoute exact={true} path="/clients/appointment" component={ClientAppointmentPage}/>
-        <PrivateRoute exact={true} path="/clients/examination-history" component={ExaminationHistoryPage}/>
-        <PrivateRoute exact={true} path="/clients/examination-results" component={ExaminationResultsPage}/>
-        <PrivateRoute exact={true} path="/receptionists/homepage" component={ReceptionistHomePage}/>
-        <PrivateRoute exact={true} path="/receptionists/appointments" component={ReceptionistAppointmentsPage}/>
-        <PrivateRoute exact={true} path="/receptionists/patients" component={ReceptionistPatientsPage}/>
-        <PrivateRoute exact={true} path="/doctors/homepage" component={DoctorHomePage}/>
-        <PrivateRoute exact={true} path="/doctors/appointments" component={DoctorAppointmentsPage}/>
-        <PrivateRoute exact={true} path="/doctors/patients" component={DoctorPatientsPage}/>
+        <PrivateRoute exact={true} path="/client/homepage" component={ClientHomePage}/>
+        <PrivateRoute exact={true} path="/client/new-appointment" component={NewAppointmentPage}/>
+        <PrivateRoute exact={true} path="/client/appointment" component={ClientAppointmentPage}/>
+        <PrivateRoute exact={true} path="/client/examination-history" component={ExaminationHistoryPage}/>
+        <PrivateRoute exact={true} path="/client/examination-results" component={ExaminationResultsPage}/>
+        <PrivateRoute exact={true} path="/receptionist/homepage" component={ReceptionistHomePage}/>
+        <PrivateRoute exact={true} path="/receptionist/appointments" component={ReceptionistAppointmentsPage}/>
+        <PrivateRoute exact={true} path="/receptionist/patients" component={ReceptionistPatientsPage}/>
+        <PrivateRoute exact={true} path="/doctor/homepage" component={DoctorHomePage}/>
+        <PrivateRoute exact={true} path="/doctor/appointments" component={DoctorAppointmentsPage}/>
+        <PrivateRoute exact={true} path="/doctor/patients" component={DoctorPatientsPage}/>
         <Redirect to="/404"/>
       </Switch>
     </Router>;

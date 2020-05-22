@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/SideMenu.scss";
+import "./SideMenu.scss";
 
 export class SideMenu extends React.PureComponent {
     render() {
