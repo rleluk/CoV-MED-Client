@@ -6,8 +6,6 @@ import "./styles/BasePage.scss";
 
 import { 
   HomePage, 
-  SignInPage,
-  SignUpPage,
   NotFoundPage,
   ClientHomePage,
   ExaminationHistoryPage,
@@ -23,6 +21,9 @@ import {
   DoctorsPage,
   ExaminationsPage
 } from './pages';
+
+import SignInPage from "./pages/user.signin";
+import SignUpPage from "./pages/user.signup";
 
 class App extends React.PureComponent {
   render() {

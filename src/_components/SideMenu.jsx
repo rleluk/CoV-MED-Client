@@ -26,7 +26,10 @@ export class SideMenu extends React.PureComponent {
         return (
             <div className="sideMenu">
                 {links}
-                <div className="footer"> footer info </div>
+                <div className="footer"> 
+                    (800) CoV-MED <br/>
+                    info@cov-med.com
+                </div>
             </div>
         );
     }

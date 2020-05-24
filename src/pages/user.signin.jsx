@@ -1,9 +1,10 @@
 import React from "react";
+import { withAlert } from 'react-alert'
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
 import { authenticationService } from "../_services/authentication.service"
 
-export class SignInPage extends React.PureComponent {
+class SignInPage extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -33,8 +34,6 @@ export class SignInPage extends React.PureComponent {
             password: this.state.password
         };
 
-        console.log(dataToSend)
-
         return fetch(process.env.REACT_APP_SERVER + "/users/authenticate", {
             method: "POST",
             headers: {
@@ -52,7 +51,7 @@ export class SignInPage extends React.PureComponent {
                         authenticationService.redirectToHomepage(json.userType);
                         break;
                     case 400:
-                        console.log("Wrong email or password.");
+                        this.props.alert.show("Nieprawidłowy email lub hasło.", { type: "error" });
                         break;
                     default:
                         throw new Error(res.error);
@@ -79,15 +78,22 @@ export class SignInPage extends React.PureComponent {
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
                 <div className="content-with-margin">
+                <div className="page-header"> Logowanie </div>
                     <form onSubmit={this.handleSubmit}>
-                        <label> Email: </label>
-                        <input type='text' name='email' onChange={this.handleChange} required/>
-                        <label> Hasło: </label>
-                        <input type='password' name='password' onChange={this.handleChange} required/>
-                        <button type='submit'>Sign In</button>
+                        <div className="label-input">
+                            <label> Email: </label>
+                            <input type='text' name='email' onChange={this.handleChange} required/>
+                        </div>
+                        <div className="label-input">
+                            <label> Hasło: </label>
+                            <input type='password' name='password' onChange={this.handleChange} required/>
+                        </div>
+                        <button type='submit'> Zaloguj się </button>
                     </form>    
                 </div>
             </div>
         );
     }
 };
+
+export default withAlert()(SignInPage);

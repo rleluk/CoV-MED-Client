@@ -2,8 +2,9 @@ import React from "react";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
 import { authenticationService } from "../_services/authentication.service"
+import { withAlert } from "react-alert";
 
-export class SignUpPage extends React.PureComponent {
+class SignUpPage extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -49,10 +50,21 @@ export class SignUpPage extends React.PureComponent {
             },
             body: JSON.stringify(dataToSend)
         })
-            .then(res => res.json())
-            .then(json => {
-                console.log(json);
-            });
+        .then(res => {
+            switch(res.status) {
+                case 200:
+                    this.props.alert.show("Rejestracja przebiegła pomyślnie!", { type: "success" });
+                    break;
+                case 400:
+                    this.props.alert.show("Nieprawidłowe dane!", { type: "error" });
+                    break;
+                default:
+                    throw new Error(res.error);
+            }
+        })
+        .catch(e => {
+            console.log(e);
+        });
     }
 
     render() {
@@ -71,23 +83,38 @@ export class SignUpPage extends React.PureComponent {
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
                 <div className="content-with-margin">
+                    <div className="page-header"> Rejestracja </div>
                     <form onSubmit={this.handleSubmit}>
-                        <label> Email: </label>
-                        <input type='text' name='email' onChange={this.handleChange} required/>
-                        <label> Hasło: </label>
-                        <input type='password' name='password' onChange={this.handleChange} required/>
-                        <label> Imię: </label>
-                        <input type='text' name='firstName' onChange={this.handleChange} required/>
-                        <label> Nazwisko: </label>
-                        <input type='text' name='lastName' onChange={this.handleChange} required/>
-                        <label> Numer telefonu: </label>
-                        <input type='text' name='phoneNumber' onChange={this.handleChange} required/>
-                        <label> PESEL: </label>
-                        <input type='text' name='pesel' onChange={this.handleChange} required/>
-                        <button type='submit'> Sign Up </button>
+                        <div className="label-input">
+                            <label> Email: </label>
+                            <input type='text' name='email' onChange={this.handleChange} required/>
+                        </div>
+                        <div className="label-input">
+                            <label> Hasło: </label>
+                            <input type='password' name='password' onChange={this.handleChange} required/>
+                        </div>
+                        <div className="label-input">
+                            <label> Imię: </label>
+                            <input type='text' name='firstName' onChange={this.handleChange} required/>
+                        </div>
+                        <div className="label-input">
+                            <label> Nazwisko: </label>
+                            <input type='text' name='lastName' onChange={this.handleChange} required/>
+                        </div>
+                        <div className="label-input">
+                            <label> Numer telefonu: </label>
+                            <input type='text' name='phoneNumber' onChange={this.handleChange} required/>
+                        </div>
+                        <div className="label-input">
+                            <label> PESEL: </label>
+                            <input type='text' name='pesel' onChange={this.handleChange} required/>
+                        </div>
+                        <button type='submit'> Zarejestruj się </button>
                     </form>
                 </div>
             </div>
         );
     }
 };
+
+export default withAlert()(SignUpPage);

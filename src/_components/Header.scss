@@ -2,14 +2,16 @@
     width: 100%;
     top: 0;
     height: 100px;
-    background-color: #09d;
+    background-color: #13a1ba;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     .logo {
         display: inline-block;
         padding: 10px;
-        font-size: 50px;
+        font-size: 60px;
         margin: 10px 0 0 50px;
-        color: #306;
+        color: #280154;
+        text-shadow: 2px 2px;
     }
 
     .button-wrapper {
@@ -17,14 +19,15 @@
         float: right;
         height: 100%;
         margin-right: 10px;
-
+        
         button {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
             margin: 0 10px 0 10px;
-            width: 110px;
-            height: 60px;
+            width: 120px;
+            height: 70px;
             font-size: 17px;
             color: #fff;
-            background-color: #05d;
+            background-color: #266bb5;
             border: none;
             cursor: pointer;
             position: relative;
