@@ -78,7 +78,7 @@ class SignInPage extends React.PureComponent {
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
                 <div className="content-with-margin">
-                <div className="page-header"> Logowanie </div>
+                    <div className="page-header"> Logowanie </div>
                     <form onSubmit={this.handleSubmit}>
                         <div className="label-input">
                             <label> Email: </label>

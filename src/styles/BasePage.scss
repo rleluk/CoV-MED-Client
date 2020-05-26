@@ -12,8 +12,7 @@ body > #root > div {
 }
 
 .content-with-margin {
-    height: calc(100% - 100px);
-    margin-left: 20%;
+    margin: 100px 0 0 20%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -62,6 +61,18 @@ body > #root > div {
             background-color: #ccc;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border: none;
+        }
+    }
+
+    .data-container {
+        align-items: center;
+        margin: 0 60px 0 60px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        width: calc(100% - 120px);
+    
+        .data-box {
+            padding: 30px;
         }
     }
 }

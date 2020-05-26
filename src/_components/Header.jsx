@@ -6,7 +6,7 @@ export class Header extends React.PureComponent {
     render() {
         const { buttons } = this.props;
         
-        if(this.props.buttons) {
+        if(buttons) {
             var linkButtons = 
                 <div className="button-wrapper">
                     {
