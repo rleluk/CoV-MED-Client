@@ -19,7 +19,7 @@ export class ReceptionistHomePage extends React.PureComponent {
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
                 <div className="content-with-margin">
-                    strona domowa recepcjonisty
+                    <div className="page-header"> Panel recepcjonisty </div>
                 </div>
             </div>
         );

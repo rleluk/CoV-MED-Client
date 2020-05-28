@@ -1,4 +1,5 @@
 import React from "react";
+import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
 import { authenticationService } from "../_services/authentication.service";
 
@@ -9,11 +10,16 @@ export class ExaminationResultsPage extends React.PureComponent {
             Wyloguj: { action: authenticationService.logout }
         }
 
+
+        const headers = ["Nazwa badania", "Data badania", "Godzina badania", "Wyniki (.pdf)"];
+        const rows = [["sample data", "sample data", "sample data", "sample data"], ["sample data", "sample data", "sample data", "sample data"]];
+        
         return (
             <div>
                 <Header buttons={buttons}/>
                 <div className="content">
-                    wyniki badań [client]
+                    <div className="page-header"> Wyniki badań </div>
+                    <Table headers={headers} rows={rows}/>
                 </div>
             </div>
         );

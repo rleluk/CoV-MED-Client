@@ -2,19 +2,47 @@ import React from "react";
 import "./Table.scss";
 
 export class Table extends React.PureComponent {
-    render() {
-        const { columns } = this.props;
+    createTable() {
+        const { headers, rows } = this.props;
 
-        columns = {
+        if(!headers) 
+            return;
+
+        let thead = [];
+        let children = [];
+
+        headers.forEach(header => {
+            children.push(<th key={header}> { header } </th>);
+        });
+        thead.push(<tr key="thead">{ children }</tr>);
+        
+        let tbody = [];
+        let i = 0;
             
-        }
+        rows.forEach(row => {
+            children = [];
 
-        if(this.props.columns) {
-            var table = 
-                <table>
+            row.forEach(cell => {
+                children.push(<td key={cell + i++}> { cell } </td>);
+            });
+            
+            tbody.push(<tr key={row + i++}>{ children }</tr>);
+        });
 
-                </table>   
-        }
+        return (
+            <table> 
+                <thead>
+                    { thead }
+                </thead>
+                <tbody> 
+                    { tbody }
+                </tbody> 
+            </table>
+        );
+    }
+
+    render() {
+        const table = this.createTable();
 
         return (
             <div className="table">

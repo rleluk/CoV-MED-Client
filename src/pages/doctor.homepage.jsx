@@ -19,7 +19,7 @@ export class DoctorHomePage extends React.PureComponent {
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
                 <div className="content-with-margin">
-                    strona domowa doktora
+                    <div className="page-header"> Panel doktora </div>
                 </div>
             </div>
         );

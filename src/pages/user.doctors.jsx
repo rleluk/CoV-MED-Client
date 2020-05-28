@@ -32,9 +32,9 @@ export class DoctorsPage extends React.PureComponent {
                 Logowanie: { url: "/signin" } 
             };
 
-        let urls = URL.get(authenticationService.userType);
+        const urls = URL.get(authenticationService.userType);
         
-        let { doctors } = this.state;
+        const { doctors } = this.state;
         if(doctors) {
             var infoBoxes = [];
             doctors.forEach(element => {
