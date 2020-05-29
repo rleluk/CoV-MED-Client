@@ -4,7 +4,8 @@ export const authenticationService = {
     logout,
     checkAuthorization,
     redirectToHomepage,
-    get userType () { return localStorage.getItem("userType"); }
+    get userType () { return localStorage.getItem("userType"); },
+    get authToken () { return localStorage.getItem("authToken"); }
 };
 
 function logout () {

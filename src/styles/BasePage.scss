@@ -20,6 +20,46 @@ body > #root > div {
     border-bottom: 2px solid #000;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+    .label-input {
+        display: block;
+        margin: 10px;
+        padding: 6px;
+
+        label {
+            display: inline-block;
+            font-size: 20px;
+            width: 160px;
+            text-align: right;
+        }
+        
+        input, select {
+            display: inline-block;
+            width: 200px;
+            margin-left: 20px;
+        }
+
+        select { width: 200px; height: 30px; }
+
+        input { width: 194px; height: 24px; }
+    }
+
+    button {
+        font-weight: 550;
+        margin: 15px 0 0 160px;
+        align-self: center;
+        padding: 8px;
+        cursor: pointer;
+        background-color: #ccc;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border: none;
+    }
+}
+
 .content-with-margin {
     margin: 100px 0 0 20%;
     display: flex;
@@ -28,40 +68,6 @@ body > #root > div {
 
     form {
         margin: 100px 160px 0 0;
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-        
-        .label-input {
-            display: block;
-            padding: 6px;
-
-            label {
-                display: inline-block;
-                font-size: 20px;
-                width: 160px;
-                text-align: right;
-            }
-    
-            input {
-                display: inline-block;
-                width: 200px;
-                height: 20px;
-                margin: 10px;
-                padding: 3px;
-            }
-        }
-
-        button {
-            font-weight: 550;
-            margin: 15px 0 0 160px;
-            align-self: center;
-            padding: 8px;
-            cursor: pointer;
-            background-color: #ccc;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border: none;
-        }
     }
 
     .data-container {
@@ -78,9 +84,21 @@ body > #root > div {
 }
 
 .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin: 100px 0 0 0;
 
     .page-header {
         margin-left: 100px;
+    }
+
+    .table {
+        align-self: center;
+        margin-top: 60px;
+    }
+
+    form {
+        margin: 60px auto 0 auto;
     }
 }
