@@ -1,5 +1,5 @@
 import React from "react";
-import { withAlert } from 'react-alert'
+import { withAlert } from "react-alert";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
 import { authenticationService } from "../_services/authentication.service"

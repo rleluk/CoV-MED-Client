@@ -2,9 +2,10 @@ import React from "react";
 import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
+import { withAlert } from "react-alert";
 import { authenticationService } from "../_services/authentication.service";
 
-export class NewAppointmentPage extends React.PureComponent {
+class NewAppointmentPage extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -25,7 +26,7 @@ export class NewAppointmentPage extends React.PureComponent {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    
+
     async fetchData(endPoint) {
         let res = await fetch(process.env.REACT_APP_SERVER + endPoint, { 
             method: "GET",
@@ -46,11 +47,18 @@ export class NewAppointmentPage extends React.PureComponent {
     }
 
     getAvailableTime(notAvailableTime) {
-        let availableTime = []
+        notAvailableTime = notAvailableTime.map(el => {
+            el = new Date(el);
+            return el.getHours() + ":" + ((el.getMinutes() === 0) ? "00" : "30");
+        });
+        
+        let availableTime = [];
         for(let i = 8; i <= 15; i++) {
             availableTime.push(i + ":00");
             availableTime.push(i + ":30");
         }
+
+        availableTime = availableTime.filter((el) => !notAvailableTime.includes(el));
         return availableTime;
     }
 
@@ -63,15 +71,27 @@ export class NewAppointmentPage extends React.PureComponent {
         switch(event.target.name) {
             case "city":
                 data = await this.fetchData(`/clinics/${event.target.value}/streets`);
-                this.setState({ streets: data });
+                this.setState({ 
+                    streets: data,
+                    services: [], doctors: [], times: [],
+                    doctor: "", date: "", time: "" 
+                });
                 break;
             case "street":
                 data = await this.fetchData(`/clinics/${this.state.city}/${event.target.value}/services`);
-                this.setState({ services: data });
+                this.setState({ 
+                    services: data,
+                    doctors: [], times: [],
+                    date: "", time: ""  
+                });
                 break;
             case "service":
                 data = await this.fetchData(`/clinics/${this.state.city}/${this.state.street}/${event.target.value}/doctors`);
-                this.setState({ doctors: data });
+                this.setState({ 
+                    doctors: data,
+                    times: [],
+                    time: ""  
+                });
                 break;
             case "date":
                 if(this.state.city && this.state.street && this.state.doctor) {
@@ -104,18 +124,35 @@ export class NewAppointmentPage extends React.PureComponent {
             },
             body: JSON.stringify(dataToSend)
         })
+        .then(res => {
+            if(res.status === 200) {
+                this.props.alert.show("Wizyta została pomyślnie zarejestrowana!", { type: "success" });
+                this.setState({
+                    cities: [], streets: [], services: [], doctors: [], times: [],
+                    city: "", street: "", service: "", doctor: "", date: "", time: ""
+                })
+            } else {
+                this.props.alert.show("Coś poszło nie tak...", { type: "error" });
+            }
+        })
         .catch(e => {
             console.log(e);
         });
     }
 
     updateOptions(data, container) {
-        if(data) {
-            container.push(<option key={"default" + data} hidden disabled selected value> Wybierz </option>);
-            data.forEach(element => { 
-                container.push(<option key={element} value={element}> {element} </option>);
-            })
-        }
+        if(!data) 
+            return;
+
+        if(data.length === 0) {
+            container.push(<option key={"empty" + data} hidden disabled selected value> --- </option>);
+            return;
+        } 
+
+        container.push(<option key={"default" + data} hidden disabled selected value> Wybierz </option>);
+        data.forEach(element => { 
+            container.push(<option key={element} value={element}> {element} </option>);
+        });
     }
 
     render() {
@@ -135,10 +172,14 @@ export class NewAppointmentPage extends React.PureComponent {
         this.updateOptions(times, timeOptions);
 
         if(doctors) {
-            doctorOptions.push(<option key={"null" + doctors} hidden disabled selected value> Wybierz </option>);
-            doctors.forEach(element => { 
-                doctorOptions.push(<option key={element} value={element.email}> {element.firstName + " " + element.lastName} </option>);
-            })
+            if(doctors.length === 0) 
+                doctorOptions.push(<option key={"empty" + doctors} hidden disabled selected value> --- </option>);
+            else {
+                doctorOptions.push(<option key={"null" + doctors} hidden disabled selected value> Wybierz </option>);
+                doctors.forEach(element => { 
+                    doctorOptions.push(<option key={element} value={element.email}> {element.firstName + " " + element.lastName} </option>);
+                })
+            }
         }
 
         return (
@@ -189,3 +230,5 @@ export class NewAppointmentPage extends React.PureComponent {
         );
     }
 };
+
+export default withAlert()(NewAppointmentPage);

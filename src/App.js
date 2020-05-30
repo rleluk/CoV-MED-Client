@@ -10,7 +10,6 @@ import {
   ClientHomePage,
   ExaminationHistoryPage,
   ExaminationResultsPage,
-  NewAppointmentPage,
   ClientAppointmentPage,
   ReceptionistHomePage,
   ReceptionistAppointmentsPage,
@@ -22,6 +21,7 @@ import {
   ExaminationsPage
 } from './pages';
 
+import NewAppointmentPage from "./pages/client.new_appointment";
 import SignInPage from "./pages/user.signin";
 import SignUpPage from "./pages/user.signup";
 
