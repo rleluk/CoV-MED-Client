@@ -3,6 +3,7 @@ import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
 import { withAlert } from "react-alert";
+import { fetchService } from "../_services/fetch.service";
 import { authenticationService } from "../_services/authentication.service";
 
 class NewAppointmentPage extends React.PureComponent {
@@ -27,22 +28,8 @@ class NewAppointmentPage extends React.PureComponent {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    async fetchData(endPoint) {
-        let res = await fetch(process.env.REACT_APP_SERVER + endPoint, { 
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${authenticationService.authToken}`,
-            }
-        });
-
-        if(res.status === 200) {
-            let data = await res.json();
-            return data;
-        }
-    }
-
     async componentDidMount() {
-        let data = await this.fetchData("/clinics/cities");
+        let data = await fetchService.getData("/clinics/cities");
         this.setState({ cities: data });
     }
 
@@ -70,7 +57,7 @@ class NewAppointmentPage extends React.PureComponent {
         let data;
         switch(event.target.name) {
             case "city":
-                data = await this.fetchData(`/clinics/${event.target.value}/streets`);
+                data = await fetchService.getData(`/clinics/${event.target.value}/streets`);
                 this.setState({ 
                     streets: data,
                     services: [], doctors: [], times: [],
@@ -78,7 +65,7 @@ class NewAppointmentPage extends React.PureComponent {
                 });
                 break;
             case "street":
-                data = await this.fetchData(`/clinics/${this.state.city}/${event.target.value}/services`);
+                data = await fetchService.getData(`/clinics/${this.state.city}/${event.target.value}/services`);
                 this.setState({ 
                     services: data,
                     doctors: [], times: [],
@@ -86,7 +73,7 @@ class NewAppointmentPage extends React.PureComponent {
                 });
                 break;
             case "service":
-                data = await this.fetchData(`/clinics/${this.state.city}/${this.state.street}/${event.target.value}/doctors`);
+                data = await fetchService.getData(`/clinics/${this.state.city}/${this.state.street}/${event.target.value}/doctors`);
                 this.setState({ 
                     doctors: data,
                     times: [],
@@ -95,7 +82,7 @@ class NewAppointmentPage extends React.PureComponent {
                 break;
             case "date":
                 if(this.state.city && this.state.street && this.state.doctor) {
-                    data = await this.fetchData(`/clinics/${this.state.city}/${this.state.street}/${this.state.doctor}/not-available-hours?date=${event.target.value}`);
+                    data = await fetchService.getData(`/clinics/${this.state.city}/${this.state.street}/${this.state.doctor}/not-available-hours?date=${event.target.value}`);
                     let availableTime = this.getAvailableTime(data);
                     this.setState({ times: availableTime });
                 }

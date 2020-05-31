@@ -67,7 +67,7 @@ form {
     align-items: flex-start;
 
     form {
-        margin: 100px 160px 0 0;
+        margin: 60px 160px 0 0;
     }
 
     .data-container {
@@ -100,5 +100,9 @@ form {
 
     form {
         margin: 60px auto 0 auto;
+    }
+
+    h1 {
+        align-self: center;
     }
 }
