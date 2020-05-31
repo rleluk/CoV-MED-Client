@@ -10,7 +10,7 @@ export class ExaminationResultsPage extends React.PureComponent {
         super(props);
 
         this.state = {
-            rows: null
+            rows: []
         }
 
         this.createPdf = this.createPdf.bind(this)
@@ -26,7 +26,7 @@ export class ExaminationResultsPage extends React.PureComponent {
         const data = await fetchService.getData("/clients/examinations");
         
         if(!data || data.length === 0) {
-            this.setState({ rows: null });
+            this.setState({ rows: [] });
             return;
         }
         
@@ -38,7 +38,7 @@ export class ExaminationResultsPage extends React.PureComponent {
 
             row.push(element.name);
             row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-            row.push(date.getHours() + ":" + date.getMinutes());
+            row.push(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
             row.push(button);
 
             rows.push(row);
@@ -62,7 +62,7 @@ export class ExaminationResultsPage extends React.PureComponent {
                 <div className="content">
                     <div className="page-header"> Wyniki badań </div>
                     {
-                        rows ? <Table headers={headers} rows={rows}/> : <h1> Nie znaleziono rekordów. </h1>
+                        rows.length ? <Table headers={headers} rows={rows}/> : <h1> Nie znaleziono rekordów. </h1>
                     }
                 </div>
             </div>
