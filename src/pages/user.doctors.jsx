@@ -3,9 +3,10 @@ import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { InfoBox } from "../_components/InfoBox";
 import { SideMenu } from "../_components/SideMenu";
+import { withAlert } from "react-alert";
 import { authenticationService } from "../_services/authentication.service"
 
-export class DoctorsPage extends React.PureComponent {
+class DoctorsPage extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,6 +34,11 @@ export class DoctorsPage extends React.PureComponent {
             };
 
         const urls = URL.get(authenticationService.userType);
+        if(authenticationService.userType === "Client") {
+            urls["Odbyj e-wizytę"] = {
+                action: () => this.props.alert.show("Brak implementacji odbywania wizyt", { type: "error" })
+            }
+        }
         
         const { doctors } = this.state;
         if(doctors) {
@@ -61,3 +67,5 @@ export class DoctorsPage extends React.PureComponent {
         );
     }
 };
+
+export default withAlert()(DoctorsPage);

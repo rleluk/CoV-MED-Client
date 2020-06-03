@@ -151,6 +151,10 @@ class NewAppointmentPage extends React.PureComponent {
         }
 
         const urls = URL.client;
+        urls["Odbyj e-wizytę"] = {
+            url: null,
+            action: () => this.props.alert.show("Brak implementacji odbywania wizyt", { type: "error" })
+        }
 
         let cityOptions = [], streetOptions = [], serviceOptions = [], doctorOptions = [], timeOptions = [];
         this.updateOptions(cities, cityOptions);

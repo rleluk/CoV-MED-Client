@@ -2,7 +2,6 @@ import React from "react";
 import jsPDF from "jspdf";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
-import { authenticationService } from "../_services/authentication.service";
 
 class ExaminationResults extends React.PureComponent {
     constructor(props) {
@@ -21,13 +20,11 @@ class ExaminationResults extends React.PureComponent {
         doc.save("wyniki.pdf");
     }
 
-    async componentDidUpdate(prevProps, prevState)  {
-        if(prevProps.data === this.props.data) 
+    updateTableData(data) {
+        if(!data)
             return;
-
-        const { data } = this.props;
-        
-        if(!data || data.length === 0) {
+            
+        if(data.length === 0) {
             this.setState({ rows: [] });
             return;
         }
@@ -47,6 +44,19 @@ class ExaminationResults extends React.PureComponent {
         });
 
         this.setState({ rows: rows });
+    }
+    
+    async componentDidMount() {
+        const { data } = this.props; 
+        this.updateTableData(data);
+    }
+
+    async componentDidUpdate(prevProps, prevState)  {
+        if(prevProps.data === this.props.data) 
+            return;
+
+        const { data } = this.props;
+        this.updateTableData(data);        
     }
 
     render() {

@@ -17,9 +17,7 @@ export class Header extends React.PureComponent {
                                         { key }
                                     </button>
                                 </Link>
-                            )
-                                :
-                            (
+                            ) : (
                                 <button key={key} type="button" onClick={buttons[key].action}>
                                     { key }
                                 </button>

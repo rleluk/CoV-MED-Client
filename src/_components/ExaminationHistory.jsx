@@ -43,13 +43,11 @@ class ExaminationHistory extends React.PureComponent {
         return text;
     }
 
-    async componentDidUpdate(prevProps, prevState) {
-        if(prevProps.data === this.props.data) 
+    updateTableData(data) {
+        if(!data)
             return;
             
-        const { data } = this.props; 
-        
-        if(!data || data.length === 0) {
+        if(data.length === 0) {
             this.setState({ rows: [] });
             return;
         }
@@ -73,6 +71,19 @@ class ExaminationHistory extends React.PureComponent {
         });
 
         this.setState({ rows: rows });
+    }
+
+    async componentDidMount() {
+        const { data } = this.props; 
+        this.updateTableData(data);
+    }
+
+    async componentDidUpdate(prevProps, prevState) {
+        if(prevProps.data === this.props.data) 
+            return;
+            
+        const { data } = this.props; 
+        this.updateTableData(data);
     }
 
     render() {

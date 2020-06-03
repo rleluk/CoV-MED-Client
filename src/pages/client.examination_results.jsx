@@ -11,6 +11,7 @@ export class ExaminationResultsPage extends React.PureComponent {
             data: null
         }
     }
+    
     async componentDidMount() {
         const fetchData = await fetchService.getData("/clients/examinations");
         this.setState({ data: fetchData });

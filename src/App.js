@@ -5,23 +5,24 @@ import history from "./_services/history.service";
 import "./styles/BasePage.scss";
 
 import { 
-  HomePage, 
   NotFoundPage,
-  ClientHomePage,
   ExaminationHistoryPage,
   ExaminationResultsPage,
-  ClientAppointmentPage,
   ReceptionistHomePage,
   ReceptionistAppointmentsPage,
+  DoctorExaminationHistoryPage,
+  DoctorExaminationResultsPage,
   ReceptionistPatientsPage,
   DoctorHomePage,
-  DoctorAppointmentsPage,
-  DoctorPatientsPage,
-  DoctorsPage,
-  ExaminationsPage
+  DoctorPatientsPage
 } from './pages';
 
+import DoctorsPage from "./pages/user.doctors";
+import ExaminationsPage from "./pages/user.examinations";
+import HomePage from "./pages/user.homepage";
+import DoctorAppointmentsPage from "./pages/doctor.appointments";
 import NewAppointmentPage from "./pages/client.new_appointment";
+import ClientHomePage from "./pages/client.homepage";
 import SignInPage from "./pages/user.signin";
 import SignUpPage from "./pages/user.signup";
 
@@ -37,7 +38,6 @@ class App extends React.PureComponent {
         <Route exact={true} path="/404/" component={NotFoundPage}/>
         <PrivateRoute exact={true} path="/client/homepage" component={ClientHomePage}/>
         <PrivateRoute exact={true} path="/client/new-appointment" component={NewAppointmentPage}/>
-        <PrivateRoute exact={true} path="/client/appointment" component={ClientAppointmentPage}/>
         <PrivateRoute exact={true} path="/client/examination-history" component={ExaminationHistoryPage}/>
         <PrivateRoute exact={true} path="/client/examination-results" component={ExaminationResultsPage}/>
         <PrivateRoute exact={true} path="/receptionist/homepage" component={ReceptionistHomePage}/>
@@ -46,6 +46,8 @@ class App extends React.PureComponent {
         <PrivateRoute exact={true} path="/doctor/homepage" component={DoctorHomePage}/>
         <PrivateRoute exact={true} path="/doctor/appointments" component={DoctorAppointmentsPage}/>
         <PrivateRoute exact={true} path="/doctor/patients" component={DoctorPatientsPage}/>
+        <PrivateRoute exact={true} path="/doctor/client/examination-history" component={DoctorExaminationHistoryPage}/>
+        <PrivateRoute exact={true} path="/doctor/client/examination-results" component={DoctorExaminationResultsPage}/>
         <Redirect to="/404"/>
       </Switch>
     </Router>;

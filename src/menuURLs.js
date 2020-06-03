@@ -5,7 +5,6 @@ export const URL = {
         "Badania": { url: "/examinations" },
         "Panel pacjenta": { url: "/client/homepage" },
         "Umów e-wizytę": { url: "/client/new-appointment" },
-        "Odbyj e-wizytę": { url: "/client/appointment" },
         "Historia leczenia": { url: "/client/examination-history" },
         "Wyniki badań": { url: "/client/examination-results" }
     },

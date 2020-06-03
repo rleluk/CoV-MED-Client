@@ -10,15 +10,22 @@ export class SideMenu extends React.PureComponent {
             var links = 
                 <div className="link-wrapper">
                     <ul>
-                        {
-                            Object.keys(urls).map(key => (
-                                <li key={key}>
-                                    <Link to={urls[key].url}>
-                                        { key }
-                                    </Link>
-                                </li>
-                            ))
-                        }
+                    {
+                        Object.keys(urls).map(key => (
+                            <li key={key}>
+                                { urls[key].url ? (
+                                        <Link to={urls[key].url}>
+                                            { key }
+                                        </Link>
+                                    ) : (
+                                        <Link onClick={urls[key].action}> 
+                                            { key }
+                                        </Link>
+                                    )
+                                }
+                            </li>
+                        ))
+                    }
                     </ul>
                 </div>
         }

@@ -13,7 +13,7 @@ export class ExaminationHistoryPage extends React.PureComponent {
     }
 
     async componentDidMount() {
-        const fetchData = await fetchService.getData("/clients/visits?toDate" + Date.now());
+        const fetchData = await fetchService.getData("/clients/visits?toDate" + new Date().toISOString());
         this.setState({ data: fetchData });
     }
 

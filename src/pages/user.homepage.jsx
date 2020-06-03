@@ -3,9 +3,10 @@ import { URL } from "../menuURLs";
 import { InfoBox } from "../_components/InfoBox";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
+import { withAlert } from "react-alert";
 import { authenticationService } from "../_services/authentication.service"
 
-export class HomePage extends React.PureComponent {
+class HomePage extends React.PureComponent {
     render() {
         const buttons = authenticationService.checkAuthorization() ? { 
                 Wyloguj: { action: authenticationService.logout }
@@ -16,6 +17,12 @@ export class HomePage extends React.PureComponent {
         
         
         let urls = URL.get(authenticationService.userType);
+        if(authenticationService.userType === "Client") {
+            urls["Odbyj e-wizytę"] = {
+                action: () => this.props.alert.show("Brak implementacji odbywania wizyt", { type: "error" })
+            }
+        }
+
         let lorem_ipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Donec fringilla libero non ipsum malesuada, ac feugiat augue gravida. 
             Curabitur nec libero vitae arcu dignissim sollicitudin eu quis mauris.
@@ -45,3 +52,5 @@ export class HomePage extends React.PureComponent {
         );
     }
 };
+
+export default withAlert()(HomePage);
