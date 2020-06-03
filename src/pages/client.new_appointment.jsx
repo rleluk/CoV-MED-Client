@@ -100,7 +100,8 @@ class NewAppointmentPage extends React.PureComponent {
                 city: this.state.city,
                 street: this.state.street
             },
-            date: new Date(this.state.date + " " + this.state.time).toISOString()
+            date: new Date(this.state.date + " " + this.state.time).toISOString(),
+            service: this.state.service
         };
 
         fetch(process.env.REACT_APP_SERVER + "/clients/make-visit", { 
