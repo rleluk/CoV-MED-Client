@@ -52,14 +52,17 @@ class ExaminationHistory extends React.PureComponent {
             return;
         }
         
+        data.sort((a, b) => a.date < b.date);
+        
         let rows = [];
         data.forEach(element => {
             let row = [];
             const date = new Date(element.date);
-            const referralButton =  <button className="save-button" 
-                onClick={() => this.createPdf(this.parseReferral(element.refferal), "skierowanie.pdf")}> Pobierz </button>;
-            const prescriptionButton = <button className="save-button" 
-                onClick={() => this.createPdf(this.parsePrescription(element.prescription), "recepta.pdf")}> Pobierz </button>;
+            const referralButton = element.refferal ? ( <button className="save-button" 
+                    onClick={() => this.createPdf(this.parseReferral(element.refferal), "skierowanie.pdf")}> Pobierz </button>) : ("---");
+
+            const prescriptionButton = element.prescription ? ( <button className="save-button" 
+                    onClick={() => this.createPdf(this.parsePrescription(element.prescription), "recepta.pdf")}> Pobierz </button>) : ("---");
 
             row.push(element.doctor.firstName + " " + element.doctor.lastName);
             row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());

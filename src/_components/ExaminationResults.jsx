@@ -29,6 +29,8 @@ class ExaminationResults extends React.PureComponent {
             return;
         }
         
+        data.sort((a, b) => a.date < b.date);
+
         let rows = [];
         data.forEach(element => {
             let row = [];
