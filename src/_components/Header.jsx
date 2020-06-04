@@ -1,30 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.scss";
+import Button from "@material-ui/core/Button";
 
 export class Header extends React.PureComponent {
     render() {
         const { buttons } = this.props;
-        
+
         if(buttons) {
-            var linkButtons = 
+            var linkButtons =
                 <div className="button-wrapper">
                     {
                         Object.keys(buttons).map(key => (
                             buttons[key].url ? (
                                 <Link key={key} to={ buttons[key].url }>
-                                    <button type="button">
+                                    <Button variant="contained" color="primary" disableElevation>
                                         { key }
-                                    </button>
+                                    </Button>
                                 </Link>
                             ) : (
-                                <button key={key} type="button" onClick={buttons[key].action}>
+                                <Button variant="contained" color="primary" disableElevation key={key} type="button" onClick={buttons[key].action}>
                                     { key }
-                                </button>
+                                </Button>
                             )
                         ))
                     }
-                </div>   
+                </div>
         }
 
         return (
