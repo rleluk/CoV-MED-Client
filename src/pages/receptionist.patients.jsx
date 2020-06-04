@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
 import { authenticationService, fetchService } from "../_services";
+import Button from "@material-ui/core/Button";
 
 export class ReceptionistPatientsPage extends React.PureComponent {
     constructor(props) {
@@ -41,7 +42,7 @@ export class ReceptionistPatientsPage extends React.PureComponent {
             const status = element.active ? 
                 <div style={{color: "green"}}> Aktywny </div> : 
                 <div style={{color: "red"}}> Nieaktywny </div>;
-            const button = <button onClick={() => this.changeStatus(active, element.email)}> { active ? "Dezaktywuj" : "Aktywuj" } </button>;
+            const button = <Button color="primary" onClick={() => this.changeStatus(active, element.email)}> { active ? "Dezaktywuj" : "Aktywuj" } </Button>;
 
             row.push(name);
             row.push(status);

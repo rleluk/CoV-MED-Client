@@ -5,6 +5,7 @@ import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
 import { authenticationService, fetchService, dateService } from "../_services";
+import Button from "@material-ui/core/Button";
 
 class NewAppointmentPage extends React.PureComponent {
     constructor(props) {
@@ -200,7 +201,7 @@ class NewAppointmentPage extends React.PureComponent {
                                 {timeOptions}
                             </select>
                         </div>
-                        <button type='submit'> Umów wizytę </button>
+                        <Button variant="contained" type='submit'> Umów wizytę </Button>
                     </form>    
                 </div>
             </div>

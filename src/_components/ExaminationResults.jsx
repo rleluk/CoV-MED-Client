@@ -1,5 +1,6 @@
 import React from "react";
 import jsPDF from "jspdf";
+import Button from "@material-ui/core/Button";
 
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
@@ -37,7 +38,7 @@ class ExaminationResults extends React.PureComponent {
         data.forEach(element => {
             let row = [];
             const date = new Date(element.date);
-            const button = <button className="save-button" onClick={() => this.createPdf(element.result)}> Pobierz </button>
+            const button = <Button color="primary" onClick={() => this.createPdf(element.result)}> Pobierz </Button>
 
             row.push(element.name);
             row.push(dateService.getFullDate(date));

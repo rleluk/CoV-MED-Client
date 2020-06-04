@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
 import { authenticationService, fetchService, dateService } from "../_services";
+import Button from "@material-ui/core/Button";
 
 class ReceptionistAppointmentsPage extends React.PureComponent {
     constructor(props) {
@@ -55,10 +56,10 @@ class ReceptionistAppointmentsPage extends React.PureComponent {
                                 clientEmail: element.email
                             }
                         }}>
-                        <button className="link-button"> Przełóż </button>     
+                        <Button color="primary"> Przełóż </Button>
                     </Link>;
 
-                const cancelButton = <button className="cancel-button" onClick={() => this.cancelVisit(element.email, visit.date)}> Odwołaj </button>;
+                const cancelButton = <Button color="primary" onClick={() => this.cancelVisit(element.email, visit.date)}> Odwołaj </Button>;
                 
                 const date = new Date(visit.date);
                 row.push(name);

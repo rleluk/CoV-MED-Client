@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
 import { authenticationService, fetchService } from "../_services";
+import Button from "@material-ui/core/Button";
 
 export class DoctorPatientsPage extends React.PureComponent {
     constructor(props) {
@@ -32,7 +33,7 @@ export class DoctorPatientsPage extends React.PureComponent {
                         data: element.visits
                     }
                 }}>
-                    <button className="link-button"> Przejdź </button>     
+                    <Button color="primary"> Przejdź </Button>
                 </Link>;
 
             const examinationsButton = <Link to={{
@@ -41,8 +42,8 @@ export class DoctorPatientsPage extends React.PureComponent {
                         data: element.examinations
                     }
                 }}>
-                    <button className="link-button"> Przejdź </button>     
-                </Link>;
+                    <Button color="primary"> Przejdź </Button>
+            </Link>;
 
             row.push(name);
             row.push(historyButton);
