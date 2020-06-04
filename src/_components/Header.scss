@@ -3,15 +3,16 @@
     width: 100%;
     top: 0;
     height: 100px;
-    background-color: #0a97b0;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #85bfff;
+    box-shadow: 0 4px 8px 0 rgba(133, 191, 255, 0.2), 0 6px 20px 0 rgba(133, 191, 255, 0.19);
 
     .logo {
         display: inline-block;
-        padding: 10px;
-        font-size: 60px;
-        margin: 10px 0 0 50px;
-        color: #000;
+        padding: 6px;
+        font-size: 55px;
+        margin: 10px 0 4px 20px;
+        color: #3f51b5;
+        font-family: verdana, sans-serif;
     }
 
     .button-wrapper {
@@ -19,17 +20,15 @@
         float: right;
         height: 100%;
         margin-right: 10px;
-        
+
         button {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+            box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0), 0 6px 15px 0 rgba(255, 255, 255, 0.19);
             margin: 0 10px 0 10px;
             width: 120px;
-            height: 70px;
-            font-size: 17px;
-            color: #fff;
-            background-color: #1b6ca8;
+            height: 60px;
             border: none;
             cursor: pointer;
+            text-decoration: none;
             position: relative;
             top: 50%;
             transform: translateY(-50%);

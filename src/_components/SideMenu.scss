@@ -8,7 +8,7 @@
 
     .link-wrapper {
         position: relative;
-        top: 50%;
+        top: 20%;
         transform: translateY(-50%);
     }
 
@@ -26,6 +26,8 @@
     a {
         text-decoration: none;
         color: #000;
+        font-family: 'Raleway', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400&display=swap');
     }
 
     .footer {
@@ -34,4 +36,13 @@
         position: absolute;
         bottom: 10px;
     }
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
 }
