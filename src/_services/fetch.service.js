@@ -1,7 +1,8 @@
 import { authenticationService } from "./authentication.service";
 
 export const fetchService = {
-    getData
+    getData,
+    putData
 };
 
 async function getData(endPoint) {
@@ -16,4 +17,15 @@ async function getData(endPoint) {
         let data = await res.json();
         return data;
     }
+}
+
+async function putData(endPoint) {
+    let res = await fetch(process.env.REACT_APP_SERVER + endPoint, { 
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${authenticationService.authToken}`,
+        }
+    });
+
+    return res.status === 200;
 }

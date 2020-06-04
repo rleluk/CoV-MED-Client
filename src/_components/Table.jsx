@@ -5,7 +5,7 @@ export class Table extends React.PureComponent {
     createTable() {
         const { headers, rows } = this.props;
 
-        if(!headers) 
+        if(!headers || !rows) 
             return;
 
         let thead = [];

@@ -21,7 +21,7 @@ class DoctorAppointmentsPage extends React.PureComponent {
     }
 
     async componentDidMount() {
-        const data = await fetchService.getData("/doctors/visits?toDate=" + new Date().toISOString());
+        const data = await fetchService.getData("/doctors/visits?fromDate=" + new Date().toISOString());
         
         if(!data || data.length === 0) {
             this.setState({ rows: [] });
