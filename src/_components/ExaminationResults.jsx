@@ -1,7 +1,9 @@
 import React from "react";
 import jsPDF from "jspdf";
+
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
+import { dateService } from "../_services/date.service";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 
@@ -31,6 +33,8 @@ class ExaminationResults extends React.PureComponent {
             return;
         }
         
+        data.sort((a, b) => a.date < b.date);
+
         let rows = [];
         data.forEach(element => {
             let row = [];
@@ -38,8 +42,8 @@ class ExaminationResults extends React.PureComponent {
             const button = <Button color="primary" onClick={() => this.createPdf(element.result)}> Pobierz </Button>
 
             row.push(element.name);
-            row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-            row.push(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
+            row.push(dateService.getFullDate(date));
+            row.push(dateService.getFullTime(date));
             row.push(button);
 
             rows.push(row);

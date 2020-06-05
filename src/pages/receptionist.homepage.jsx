@@ -2,7 +2,7 @@ import React from "react";
 import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-import { authenticationService } from "../_services/authentication.service";
+import { authenticationService } from "../_services";
 
 export class ReceptionistHomePage extends React.PureComponent {
     render() {

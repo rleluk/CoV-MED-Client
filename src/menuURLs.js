@@ -4,9 +4,9 @@ export const URL = {
         "Lekarze": { url: "/doctors" },
         "Badania": { url: "/examinations" },
         "Panel pacjenta": { url: "/client/homepage" },
-        "Umów e-wizytę": { url: "/client/new-appointment" },
         "Historia leczenia": { url: "/client/examination-history" },
-        "Wyniki badań": { url: "/client/examination-results" }
+        "Wyniki badań": { url: "/client/examination-results" },
+        "Umów e-wizytę": { url: "/client/new-appointment" }
     },
 
     doctor: {

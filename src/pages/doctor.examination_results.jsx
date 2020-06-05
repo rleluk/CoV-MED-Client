@@ -1,6 +1,7 @@
 import React from "react";
+import history from "../_services/history.service";
 import ExaminationResults from "../_components/ExaminationResults";
-import { authenticationService } from "../_services/authentication.service";
+import { authenticationService } from "../_services";
 
 export class DoctorExaminationResultsPage extends React.PureComponent {
     render() {
@@ -9,7 +10,11 @@ export class DoctorExaminationResultsPage extends React.PureComponent {
             Wyloguj: { action: authenticationService.logout }
         }
 
-        const { data } = this.props.location.state;
+        if(!this.props.location.state) {
+            history.goBack();
+        } else {
+            var { data } = this.props.location.state;
+        }
         
         return <ExaminationResults buttons={buttons} data={data} />;
     }

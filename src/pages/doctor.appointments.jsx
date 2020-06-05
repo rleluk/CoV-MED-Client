@@ -1,11 +1,10 @@
 import React from "react";
+import { withAlert } from "react-alert";
+
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
-import { withAlert } from "react-alert";
-import { fetchService } from "../_services/fetch.service";
-import { authenticationService } from "../_services/authentication.service";
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { authenticationService, fetchService, dateService } from "../_services";
 
 class DoctorAppointmentsPage extends React.PureComponent {
     constructor(props) {
@@ -23,7 +22,7 @@ class DoctorAppointmentsPage extends React.PureComponent {
     }
 
     async componentDidMount() {
-        const data = await fetchService.getData("/doctors/visits?toDate=" + new Date().toISOString());
+        const data = await fetchService.getData("/doctors/visits?fromDate=" + new Date().toISOString());
         
         if(!data || data.length === 0) {
             this.setState({ rows: [] });
@@ -43,8 +42,8 @@ class DoctorAppointmentsPage extends React.PureComponent {
 
 
                 row.push(name);
-                row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-                row.push(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
+                row.push(dateService.getFullDate(date));
+                row.push(dateService.getFullTime(date));
                 row.push(startButton);
 
                 rows.push(row);

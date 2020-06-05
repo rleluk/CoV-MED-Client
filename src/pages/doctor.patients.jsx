@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
-import { fetchService } from "../_services/fetch.service";
-import { authenticationService } from "../_services/authentication.service";
+import { authenticationService, fetchService } from "../_services";
 import Button from "@material-ui/core/Button";
 
 export class DoctorPatientsPage extends React.PureComponent {

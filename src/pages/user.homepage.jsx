@@ -1,10 +1,11 @@
 import React from "react";
+import { withAlert } from "react-alert";
+
 import { URL } from "../menuURLs";
 import { InfoBox } from "../_components/InfoBox";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-import { withAlert } from "react-alert";
-import { authenticationService } from "../_services/authentication.service"
+import { authenticationService } from "../_services"
 
 class HomePage extends React.PureComponent {
     render() {

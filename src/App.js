@@ -9,7 +9,6 @@ import {
   ExaminationHistoryPage,
   ExaminationResultsPage,
   ReceptionistHomePage,
-  ReceptionistAppointmentsPage,
   DoctorExaminationHistoryPage,
   DoctorExaminationResultsPage,
   ReceptionistPatientsPage,
@@ -17,6 +16,8 @@ import {
   DoctorPatientsPage
 } from './pages';
 
+import PostponeAppointmentPage from "./pages/receptionist.postpone_appointment";
+import ReceptionistAppointmentsPage from "./pages/receptionist.appointments";
 import DoctorsPage from "./pages/user.doctors";
 import ExaminationsPage from "./pages/user.examinations";
 import HomePage from "./pages/user.homepage";
@@ -43,6 +44,7 @@ class App extends React.PureComponent {
         <PrivateRoute exact={true} path="/receptionist/homepage" component={ReceptionistHomePage}/>
         <PrivateRoute exact={true} path="/receptionist/appointments" component={ReceptionistAppointmentsPage}/>
         <PrivateRoute exact={true} path="/receptionist/patients" component={ReceptionistPatientsPage}/>
+        <PrivateRoute exact={true} path="/receptionist/postpone-appointment" component={PostponeAppointmentPage}/>
         <PrivateRoute exact={true} path="/doctor/homepage" component={DoctorHomePage}/>
         <PrivateRoute exact={true} path="/doctor/appointments" component={DoctorAppointmentsPage}/>
         <PrivateRoute exact={true} path="/doctor/patients" component={DoctorPatientsPage}/>

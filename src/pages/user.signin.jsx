@@ -1,8 +1,9 @@
 import React from "react";
 import { withAlert } from "react-alert";
+
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-import { authenticationService } from "../_services/authentication.service"
+import { authenticationService } from "../_services"
 
 class SignInPage extends React.PureComponent {
     constructor(props) {
@@ -45,7 +46,6 @@ class SignInPage extends React.PureComponent {
                 switch(res.status) {
                     case 200:
                         const json = await res.json();
-                        console.log(json);
                         localStorage.setItem('authToken', json.token);
                         localStorage.setItem('userType', json.userType);
                         authenticationService.redirectToHomepage(json.userType);

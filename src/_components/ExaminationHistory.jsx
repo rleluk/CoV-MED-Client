@@ -1,9 +1,11 @@
 import React from "react";
 import jsPDF from "jspdf";
+
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
+import { dateService } from "../_services/date.service";
 
 class ExaminationHistory extends React.PureComponent {
     constructor(props) {
@@ -54,18 +56,21 @@ class ExaminationHistory extends React.PureComponent {
             return;
         }
         
+        data.sort((a, b) => a.date < b.date);
+
         let rows = [];
         data.forEach(element => {
             let row = [];
             const date = new Date(element.date);
-            const referralButton =  <Button color="primary" onClick={() =>
-                            this.createPdf(this.parseReferral(element.refferal), "skierowanie.pdf")}> Pobierz </Button>;
-            const prescriptionButton = <Button color="primary"
-                onClick={() => this.createPdf(this.parsePrescription(element.prescription), "recepta.pdf")}> Pobierz </Button>;
+            const referralButton = element.refferal ? ( <Button color="primary"
+                    onClick={() => this.createPdf(this.parseReferral(element.refferal), "skierowanie.pdf")}> Pobierz </Button>) : ("---");
+
+            const prescriptionButton = element.prescription ? ( <Button color="primary"
+                    onClick={() => this.createPdf(this.parsePrescription(element.prescription), "recepta.pdf")}> Pobierz </Button>) : ("---");
 
             row.push(element.doctor.firstName + " " + element.doctor.lastName);
-            row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-            row.push(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
+            row.push(dateService.getFullDate(date));
+            row.push(dateService.getFullTime(date));
             row.push(prescriptionButton);
             row.push(referralButton);
 

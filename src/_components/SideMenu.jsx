@@ -19,7 +19,7 @@ export class SideMenu extends React.PureComponent {
                                             { key }
                                         </Link>
                                     ) : (
-                                        <Link onClick={urls[key].action}>
+                                        <Link to="#" onClick={urls[key].action}>
                                             { key }
                                         </Link>
                                     )
@@ -33,7 +33,7 @@ export class SideMenu extends React.PureComponent {
 
         return (
             <div className="sideMenu">
-                <img src={Icon} />
+                <img alt="" src={Icon} />
                 {links}
                 <div className="footer">
                     (800) CoV-MED <br/>

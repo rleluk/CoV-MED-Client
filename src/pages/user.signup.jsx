@@ -1,8 +1,9 @@
 import React from "react";
+import { withAlert } from "react-alert";
+
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-import { authenticationService } from "../_services/authentication.service"
-import { withAlert } from "react-alert";
+import { authenticationService } from "../_services"
 
 class SignUpPage extends React.PureComponent {
     constructor(props) {
