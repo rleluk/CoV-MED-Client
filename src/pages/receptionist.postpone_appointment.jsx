@@ -4,6 +4,7 @@ import { withAlert } from "react-alert";
 import history from "../_services/history.service";
 import { Header } from "../_components/Header";
 import { authenticationService, fetchService, dateService } from "../_services";
+import Button from "@material-ui/core/Button";
 
 class PostponeAppointmentPage extends React.PureComponent {
     constructor(props) {
@@ -150,7 +151,7 @@ class PostponeAppointmentPage extends React.PureComponent {
                                 { timeOptions }
                             </select>
                         </div>
-                        <button type='submit'> Przełóż wizytę </button>
+                        <Button variant="contained" type='submit' style={{marginLeft:180}}> Przełóż wizytę </Button>
                     </form>    
                 </div>
             </div>

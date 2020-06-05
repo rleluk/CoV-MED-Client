@@ -4,6 +4,7 @@ import { withAlert } from "react-alert";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
 import { authenticationService } from "../_services"
+import Button from "@material-ui/core/Button";
 
 class SignInPage extends React.PureComponent {
     constructor(props) {
@@ -88,7 +89,7 @@ class SignInPage extends React.PureComponent {
                             <label> Hasło: </label>
                             <input type='password' name='password' onChange={this.handleChange} required/>
                         </div>
-                        <button type='submit'> Zaloguj się </button>
+                        <Button variant="contained" type='submit' style={{marginLeft:180}}> Zaloguj się </Button>
                     </form>    
                 </div>
             </div>
