@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
 import { withAlert } from "react-alert";
 
 import { Header } from "../_components/Header";
@@ -110,7 +111,7 @@ class SignUpPage extends React.PureComponent {
                             <label> PESEL: </label>
                             <input type='text' name='pesel' onChange={this.handleChange} required/>
                         </div>
-                        <button type='submit'> Zarejestruj się </button>
+                        <Button variant="contained" type='submit' style={{marginLeft:180}}> Zarejestruj się </Button>
                     </form>
                 </div>
             </div>

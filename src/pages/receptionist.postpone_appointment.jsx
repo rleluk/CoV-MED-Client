@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
 import { withAlert } from "react-alert";
 
 import history from "../_services/history.service";
@@ -150,7 +151,7 @@ class PostponeAppointmentPage extends React.PureComponent {
                                 { timeOptions }
                             </select>
                         </div>
-                        <button type='submit'> Przełóż wizytę </button>
+                        <Button variant="contained" type='submit' style={{marginLeft:180}}> Przełóż wizytę </Button>
                     </form>    
                 </div>
             </div>

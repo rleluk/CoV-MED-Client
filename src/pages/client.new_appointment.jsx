@@ -201,7 +201,7 @@ class NewAppointmentPage extends React.PureComponent {
                                 {timeOptions}
                             </select>
                         </div>
-                        <Button variant="contained" type='submit'> Umów wizytę </Button>
+                        <Button variant="contained" type='submit' style={{marginLeft:180}}> Umów wizytę </Button>
                     </form>    
                 </div>
             </div>
