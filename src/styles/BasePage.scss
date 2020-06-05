@@ -6,6 +6,9 @@ body {
     height: fit-content;
     font-family: 'Raleway', sans-serif;
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500;600&display=swap');
+    a {
+        text-decoration:none;
+    }
 }
 
 body > #root > div {
