@@ -4,8 +4,6 @@ import Button from "@material-ui/core/Button";
 
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
-import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
 import { dateService } from "../_services/date.service";
 
 class ExaminationHistory extends React.PureComponent {
