@@ -1,7 +1,7 @@
 import React from "react";
-import ExaminationHistory from "../_components/ExaminationHistory";
-import { authenticationService } from "../_services/authentication.service";
 import history from "../_services/history.service";
+import ExaminationHistory from "../_components/ExaminationHistory";
+import { authenticationService } from "../_services";
 
 export class DoctorExaminationHistoryPage extends React.PureComponent {
     render() {

@@ -1,10 +1,11 @@
 import React from "react";
+import { withAlert } from "react-alert";
+
 import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { InfoBox } from "../_components/InfoBox";
 import { SideMenu } from "../_components/SideMenu";
-import { withAlert } from "react-alert";
-import { authenticationService } from "../_services/authentication.service"
+import { authenticationService } from "../_services"
 
 class ExaminationsPage extends React.PureComponent {
     render() {

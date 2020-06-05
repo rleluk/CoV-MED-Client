@@ -1,12 +1,9 @@
 import React from "react";
-import { URL } from "../menuURLs";
-import { Header } from "../_components/Header";
-import { SideMenu } from "../_components/SideMenu";
 import { withAlert } from "react-alert";
-import { dateService } from "../_services/date.service";
-import { fetchService } from "../_services/fetch.service";
-import { authenticationService } from "../_services/authentication.service";
+
 import history from "../_services/history.service";
+import { Header } from "../_components/Header";
+import { authenticationService, fetchService, dateService } from "../_services";
 
 class PostponeAppointmentPage extends React.PureComponent {
     constructor(props) {
@@ -85,13 +82,17 @@ class PostponeAppointmentPage extends React.PureComponent {
 
         if(!this.props.location.state) {
             history.goBack();
+        } else {
+            var { clinic, doctor, service, date } = this.props.location.state.visit;
+            var { city, street } = clinic;
+
+            date = new Date(date);
+            var oldDate = dateService.getFullDate(date, "-", "YYYY-MM-DD");
+            var oldTime = dateService.getFullTime(date);
+
+            var doctorName = doctor.firstName + " " + doctor.lastName;
         }
-
-        const { clinic, doctor, service } = this.props.location.state.visit;
-        const date = new Date(this.props.location.state.visit.date);
-        const oldDate = dateService.getFullDate(date, "-", "YYYY-MM-DD");
-        const oldTime = dateService.getFullTime(date);
-
+        
         return (
             <div>
                 <Header buttons={buttons}/>
@@ -101,13 +102,13 @@ class PostponeAppointmentPage extends React.PureComponent {
                         <div className="label-input">
                             <label> Miasto: </label>
                             <select name="city" disabled>
-                                <option value={clinic.city}> {clinic.city} </option>
+                                <option value={city}> {city} </option>
                             </select>
                         </div>
                         <div className="label-input">
                             <label> Placówka: </label>
                             <select name="street" disabled>
-                                <option value={clinic.street}> {clinic.street} </option>
+                                <option value={street}> {street} </option>
                             </select>
                         </div>
                         <div className="label-input">
@@ -119,7 +120,7 @@ class PostponeAppointmentPage extends React.PureComponent {
                         <div className="label-input">
                             <label> Lekarz: </label>
                             <select name="doctor" disabled>
-                                <option value={doctor.firstName + " " + doctor.lastName}> {doctor.firstName + " " + doctor.lastName} </option>
+                                <option value={doctorName}> {doctorName} </option>
                             </select>
                         </div>
                         <div className="label-input">

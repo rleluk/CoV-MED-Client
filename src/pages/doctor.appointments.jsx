@@ -1,10 +1,9 @@
 import React from "react";
+import { withAlert } from "react-alert";
+
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
-import { withAlert } from "react-alert";
-import { dateService } from "../_services/date.service";
-import { fetchService } from "../_services/fetch.service";
-import { authenticationService } from "../_services/authentication.service";
+import { authenticationService, fetchService, dateService } from "../_services";
 
 class DoctorAppointmentsPage extends React.PureComponent {
     constructor(props) {

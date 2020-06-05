@@ -1,10 +1,10 @@
 import React from "react";
+import { withAlert } from "react-alert";
+
 import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-import { withAlert } from "react-alert";
-import { fetchService } from "../_services/fetch.service";
-import { authenticationService } from "../_services/authentication.service";
+import { authenticationService, fetchService } from "../_services";
 
 class NewAppointmentPage extends React.PureComponent {
     constructor(props) {

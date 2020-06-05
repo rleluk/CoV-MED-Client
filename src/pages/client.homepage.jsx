@@ -1,9 +1,10 @@
 import React from "react";
+import { withAlert } from "react-alert";
+
 import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-import { withAlert } from "react-alert";
-import { authenticationService } from "../_services/authentication.service";
+import { authenticationService } from "../_services";
 
 class ClientHomePage extends React.PureComponent {
     render() {

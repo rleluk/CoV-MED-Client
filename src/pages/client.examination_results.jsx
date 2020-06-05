@@ -1,7 +1,6 @@
 import React from "react";
 import ExaminationResults from "../_components/ExaminationResults";
-import { fetchService } from "../_services/fetch.service";
-import { authenticationService } from "../_services/authentication.service";
+import { authenticationService, fetchService } from "../_services";
 
 export class ExaminationResultsPage extends React.PureComponent {
     constructor(props) {

@@ -1,8 +1,7 @@
 import React from "react";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
-import { fetchService } from "../_services/fetch.service";
-import { authenticationService } from "../_services/authentication.service";
+import { authenticationService, fetchService } from "../_services";
 
 export class ReceptionistPatientsPage extends React.PureComponent {
     constructor(props) {
