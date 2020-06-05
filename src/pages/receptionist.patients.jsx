@@ -50,7 +50,7 @@ export class ReceptionistPatientsPage extends React.PureComponent {
 
             rows.push(row);
         });
-        console.log(data);
+
         this.setState({ rows: rows });
     }
 

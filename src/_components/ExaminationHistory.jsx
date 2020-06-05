@@ -2,6 +2,7 @@ import React from "react";
 import jsPDF from "jspdf";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
+import { dateService } from "../_services/date.service";
 
 class ExaminationHistory extends React.PureComponent {
     constructor(props) {
@@ -65,8 +66,8 @@ class ExaminationHistory extends React.PureComponent {
                     onClick={() => this.createPdf(this.parsePrescription(element.prescription), "recepta.pdf")}> Pobierz </button>) : ("---");
 
             row.push(element.doctor.firstName + " " + element.doctor.lastName);
-            row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-            row.push(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
+            row.push(dateService.getFullDate(date));
+            row.push(dateService.getFullTime(date));
             row.push(prescriptionButton);
             row.push(referralButton);
 

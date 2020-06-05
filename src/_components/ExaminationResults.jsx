@@ -2,6 +2,7 @@ import React from "react";
 import jsPDF from "jspdf";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
+import { dateService } from "../_services/date.service";
 
 class ExaminationResults extends React.PureComponent {
     constructor(props) {
@@ -38,8 +39,8 @@ class ExaminationResults extends React.PureComponent {
             const button = <button className="save-button" onClick={() => this.createPdf(element.result)}> Pobierz </button>
 
             row.push(element.name);
-            row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-            row.push(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
+            row.push(dateService.getFullDate(date));
+            row.push(dateService.getFullTime(date));
             row.push(button);
 
             rows.push(row);

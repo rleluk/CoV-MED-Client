@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
+import { withAlert } from "react-alert";
 import { fetchService } from "../_services/fetch.service";
+import { dateService } from "../_services/date.service";
 import { authenticationService } from "../_services/authentication.service";
 
-export class ReceptionistAppointmentsPage extends React.PureComponent {
+class ReceptionistAppointmentsPage extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -14,15 +17,23 @@ export class ReceptionistAppointmentsPage extends React.PureComponent {
 
     }
 
-    postponeVisit() {
-        
+    async cancelVisit(email, date) {
+        const dataToSend = {
+            client: {
+                email: email
+            },
+            date: date
+        }
+
+        if (await fetchService.deleteData("/receptionists/cancel-visit", dataToSend)) {
+            this.props.alert.show("Wizyta została pomyślnie odwołana", { type: "success" });
+            this.updatePatient();
+        } else {
+            this.props.alert.show("Coś poszło nie tak...", { type: "error" });
+        }
     }
 
-    cancelVisit() {
-
-    }
-
-    async componentDidMount() {
+    async updatePatient() {
         const data = await fetchService.getData("/receptionists/visits?fromDate=" + new Date().toISOString());
         
         if(!data || data.length === 0) {
@@ -38,13 +49,22 @@ export class ReceptionistAppointmentsPage extends React.PureComponent {
             element.visits.forEach(visit => {
                 let row = [];
 
-                const date = new Date(visit.date);
-                const postponeButton = <button className="postpone-button" onClick={this.postponeVisit}> Przełóż </button>;
-                const cancelButton = <button className="cancel-button" onClick={this.cancelVisit}> Odwołaj </button>;
+                const postponeButton = <Link to={{
+                            pathname: "/receptionist/postpone-appointment", 
+                            state: {
+                                visit: visit,
+                                email: element.email
+                            }
+                        }}>
+                        <button className="link-button"> Przełóż </button>     
+                    </Link>;
 
+                const cancelButton = <button className="cancel-button" onClick={() => this.cancelVisit(element.email, visit.date)}> Odwołaj </button>;
+                
+                const date = new Date(visit.date);
                 row.push(name);
-                row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-                row.push(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
+                row.push(dateService.getFullDate(date));
+                row.push(dateService.getFullTime(date));
                 row.push(postponeButton);
                 row.push(cancelButton);
 
@@ -53,6 +73,10 @@ export class ReceptionistAppointmentsPage extends React.PureComponent {
         });
 
         this.setState({ rows: rows });
+    }
+
+    componentDidMount() {
+        this.updatePatient();
     }
 
     render() {
@@ -82,3 +106,5 @@ export class ReceptionistAppointmentsPage extends React.PureComponent {
         );
     }
 };
+
+export default withAlert()(ReceptionistAppointmentsPage);

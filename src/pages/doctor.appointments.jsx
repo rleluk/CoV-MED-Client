@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
 import { withAlert } from "react-alert";
+import { dateService } from "../_services/date.service";
 import { fetchService } from "../_services/fetch.service";
 import { authenticationService } from "../_services/authentication.service";
 
@@ -40,8 +41,8 @@ class DoctorAppointmentsPage extends React.PureComponent {
                 const startButton = <button className="start-button" onClick={this.startVisit}> Rozpocznij </button>
 
                 row.push(name);
-                row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-                row.push(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
+                row.push(dateService.getFullDate(date));
+                row.push(dateService.getFullTime(date));
                 row.push(startButton);
 
                 rows.push(row);
