@@ -2,6 +2,7 @@ import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute } from "./_components/PrivateRoute";
 import history from "./_services/history.service";
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import "./styles/BasePage.scss";
 
 import { 
