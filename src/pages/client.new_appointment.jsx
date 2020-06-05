@@ -4,7 +4,7 @@ import { withAlert } from "react-alert";
 import { URL } from "../menuURLs";
 import { Header } from "../_components/Header";
 import { SideMenu } from "../_components/SideMenu";
-import { authenticationService, fetchService } from "../_services";
+import { authenticationService, fetchService, dateService } from "../_services";
 
 class NewAppointmentPage extends React.PureComponent {
     constructor(props) {
@@ -31,22 +31,6 @@ class NewAppointmentPage extends React.PureComponent {
     async componentDidMount() {
         let data = await fetchService.getData("/clinics/cities");
         this.setState({ cities: data });
-    }
-
-    getAvailableTime(notAvailableTime) {
-        notAvailableTime = notAvailableTime.map(el => {
-            el = new Date(el);
-            return el.getHours() + ":" + ((el.getMinutes() === 0) ? "00" : "30");
-        });
-        
-        let availableTime = [];
-        for(let i = 8; i <= 15; i++) {
-            availableTime.push(i + ":00");
-            availableTime.push(i + ":30");
-        }
-
-        availableTime = availableTime.filter((el) => !notAvailableTime.includes(el));
-        return availableTime;
     }
 
     async handleChange(event) {
@@ -84,7 +68,7 @@ class NewAppointmentPage extends React.PureComponent {
             case "date":
                 if(this.state.city && this.state.street && this.state.doctor) {
                     data = await fetchService.getData(`/clinics/${this.state.city}/${this.state.street}/${this.state.doctor}/not-available-hours?date=${event.target.value}`);
-                    let availableTime = this.getAvailableTime(data);
+                    let availableTime = dateService.getAvailableTime(data);
                     this.setState({ times: availableTime });
                 }
                 break;

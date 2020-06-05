@@ -52,7 +52,7 @@ class ReceptionistAppointmentsPage extends React.PureComponent {
                             pathname: "/receptionist/postpone-appointment", 
                             state: {
                                 visit: visit,
-                                email: element.email
+                                clientEmail: element.email
                             }
                         }}>
                         <button className="link-button"> Przełóż </button>     

@@ -20,13 +20,24 @@ async function getData(endPoint) {
     }
 }
 
-async function putData(endPoint) {
-    let res = await fetch(process.env.REACT_APP_SERVER + endPoint, { 
-        method: "PUT",
-        headers: {
-            "Authorization": `Bearer ${authenticationService.authToken}`
-        }
-    });
+async function putData(endPoint, body = null) {
+    let res = body ? (
+        await fetch(process.env.REACT_APP_SERVER + endPoint, { 
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${authenticationService.authToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+    ) : (
+        await fetch(process.env.REACT_APP_SERVER + endPoint, { 
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${authenticationService.authToken}`
+            }
+        })
+    )
 
     return res.status === 200;
 }

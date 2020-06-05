@@ -10,68 +10,82 @@ class PostponeAppointmentPage extends React.PureComponent {
         super(props);
 
         this.state = {
-            times: [],
+            doctorName: "",
+            doctorEmail: "",
+            clientEmail: "",
+            service: "",
+            city: "",
+            street: "",
+            oldDate: "",
             date: "",
-            time: ""
+            time: "",
+            times: []
         }
         
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount() {
-        // console.log(this.props)
-    }
+        const { clinic, doctor, service } = this.props.location.state.visit;
+        const { city, street } = clinic;
+        const { clientEmail } = this.props.location.state;
+        const oldDate = this.props.location.state.visit.date;
 
-    getAvailableTime(notAvailableTime) {
-        notAvailableTime = notAvailableTime.map(el => {
-            el = new Date(el);
-            return el.getHours() + ":" + ((el.getMinutes() === 0) ? "00" : "30");
+        const doctorName = doctor.firstName + " " + doctor.lastName;
+        const date = dateService.getFullDate(new Date(oldDate), "-", "YYYY-MM-DD");
+
+        await this.setState({ 
+            city: city, 
+            street: street, 
+            clientEmail: clientEmail,
+            doctorName: doctorName, 
+            doctorEmail: doctor.email,
+            service: service, 
+            oldDate: oldDate,
+            date: date
         });
-        
-        let availableTime = [];
-        for(let i = 8; i <= 15; i++) {
-            availableTime.push(i + ":00");
-            availableTime.push(i + ":30");
-        }
 
-        availableTime = availableTime.filter((el) => !notAvailableTime.includes(el));
-        return availableTime;
+        this.updateDate(date);    
     }
 
-    async handleChange(event) {
+    handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
         });
+
+        if(event.target.name === "date") {
+            this.updateDate(event.target.value);
+        }
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-    //     const dataToSend = {
-    //         doctor: {
-    //             email: this.state.email
-    //         },
-    //         oldDate: this.state.oldDate,
-    //         newDate: new Date(this.state.date + " " + this.state.time).toISOString()
-    //     };
+    async updateDate(date) {
+        const { city, street, doctorEmail } = this.state;
+        if(city && street && doctorEmail) {
+            let data = await fetchService.getData(`/clinics/${city}/${street}/${doctorEmail}/not-available-hours?date=${date}`);
+            let availableTime = dateService.getAvailableTime(data);
+            this.setState({ times: availableTime });
+        }
+    }
 
-    //     fetch(process.env.REACT_APP_SERVER + "/clients/make-visit", { 
-    //         method: "POST",
-    //         headers: {
-    //             "Authorization": `Bearer ${authenticationService.authToken}`,
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(dataToSend)
-    //     })
-    //     .then(res => {
-    //         if(res.status === 200) {
-    //             this.props.alert.show("Wizyta została pomyślnie przełożona!", { type: "success" });
-    //         } else {
-    //             this.props.alert.show("Coś poszło nie tak...", { type: "error" });
-    //         }
-    //     })
-    //     .catch(e => {
-    //         console.log(e);
-    //     });
+    async handleSubmit(event) {
+        event.preventDefault();
+        const dataToSend = {
+            client: {
+                email: this.state.clientEmail
+            },
+            oldDate: this.state.oldDate,
+            newDate: new Date(this.state.date + " " + this.state.time).toISOString()
+        };
+
+        const res = await fetchService.putData("/receptionists/postpone-visit", dataToSend);
+
+        if(res) {
+            this.props.alert.show("Wizyta została pomyślnie przełożona!", { type: "success" });
+            history.goBack();
+        } else {
+            this.props.alert.show("Coś poszło nie tak...", { type: "error" });
+        }
     }
 
     render() {
@@ -83,14 +97,17 @@ class PostponeAppointmentPage extends React.PureComponent {
         if(!this.props.location.state) {
             history.goBack();
         } else {
-            var { clinic, doctor, service, date } = this.props.location.state.visit;
-            var { city, street } = clinic;
+            var { city, street, service, doctorName, date, times } = this.state;
 
-            date = new Date(date);
-            var oldDate = dateService.getFullDate(date, "-", "YYYY-MM-DD");
-            var oldTime = dateService.getFullTime(date);
-
-            var doctorName = doctor.firstName + " " + doctor.lastName;
+            var timeOptions = [];
+            if(times.length === 0) {
+                timeOptions.push(<option key={"empty" + times} hidden disabled selected value> --- </option>);
+            } else {
+                timeOptions.push(<option key={"default" + times} hidden disabled selected value> Wybierz </option>);
+                times.forEach(element => { 
+                    timeOptions.push(<option key={element} value={element}> {element} </option>);
+                });
+            }
         }
         
         return (
@@ -125,12 +142,12 @@ class PostponeAppointmentPage extends React.PureComponent {
                         </div>
                         <div className="label-input">
                             <label> Data: </label>
-                            <input type='date' name='date' value={oldDate} onChange={this.handleChange}/>
+                            <input type='date' name='date' defaultValue={date} required onChange={this.handleChange}/>
                         </div>
                         <div className="label-input">
                             <label> Godzina: </label>
-                            <select name="time" onChange={this.handleChange}>
-                                <option value={oldTime}> {oldTime} </option>
+                            <select name="time" required onChange={this.handleChange}>
+                                { timeOptions }
                             </select>
                         </div>
                         <button type='submit'> Przełóż wizytę </button>
