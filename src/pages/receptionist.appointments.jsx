@@ -1,5 +1,6 @@
 import React from "react";
 import { withAlert } from "react-alert";
+import { confirmAlert } from "react-confirm-alert";
 
 import { Link } from "react-router-dom";
 import { Table } from "../_components/Table";
@@ -17,20 +18,34 @@ class ReceptionistAppointmentsPage extends React.PureComponent {
 
     }
 
-    async cancelVisit(email, date) {
-        const dataToSend = {
-            client: {
-                email: email
-            },
-            date: date
-        }
-
-        if (await fetchService.deleteData("/receptionists/cancel-visit", dataToSend)) {
-            this.props.alert.show("Wizyta została pomyślnie odwołana", { type: "success" });
-            this.updatePatient();
-        } else {
-            this.props.alert.show("Coś poszło nie tak...", { type: "error" });
-        }
+    cancelVisit(email, date) {
+        confirmAlert({
+            title: 'Potwierdzenie',
+            message: 'Na pewno chcesz odwołać wizytę?',
+            buttons: [
+              {
+                label: 'Tak',
+                onClick: async () => {
+                    const dataToSend = {
+                        client: {
+                            email: email
+                        },
+                        date: date
+                    }
+            
+                    if (await fetchService.deleteData("/receptionists/cancel-visit", dataToSend)) {
+                        this.props.alert.show("Wizyta została pomyślnie odwołana", { type: "success" });
+                        this.updatePatient();
+                    } else {
+                        this.props.alert.show("Coś poszło nie tak...", { type: "error" });
+                    }
+                }
+              },
+              {
+                label: 'Nie'
+              }
+            ]
+        });
     }
 
     async updatePatient() {

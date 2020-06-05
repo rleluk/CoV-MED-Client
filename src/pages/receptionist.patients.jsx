@@ -1,4 +1,6 @@
 import React from "react";
+import { confirmAlert } from "react-confirm-alert";
+
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
 import { authenticationService, fetchService } from "../_services";
@@ -15,14 +17,27 @@ export class ReceptionistPatientsPage extends React.PureComponent {
         this.changeStatus = this.changeStatus.bind(this);
     }
 
-    async changeStatus(active, email) {
-        if(active) {
-            await fetchService.putData("/receptionists/deactivate/" + email);
-        } else {
-            await fetchService.putData("/receptionists/activate/" + email);
-        }
-
-        this.updatePatient();
+    changeStatus(active, email) {
+        confirmAlert({
+            title: 'Potwierdzenie',
+            message: 'Na pewno chcesz zmienić status konta pacjenta?',
+            buttons: [
+              {
+                label: 'Tak',
+                onClick: async () => {
+                    if(active) {
+                        await fetchService.putData("/receptionists/deactivate/" + email);
+                    } else {
+                        await fetchService.putData("/receptionists/activate/" + email);
+                    }
+                    this.updatePatient();
+                }
+              },
+              {
+                label: 'Nie'
+              }
+            ]
+        });
     }
 
     async updatePatient() {

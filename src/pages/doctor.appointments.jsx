@@ -5,6 +5,7 @@ import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
 import Button from '@material-ui/core/Button';
 import { authenticationService, fetchService, dateService } from "../_services";
+import Button from '@material-ui/core/Button';
 
 class DoctorAppointmentsPage extends React.PureComponent {
     constructor(props) {

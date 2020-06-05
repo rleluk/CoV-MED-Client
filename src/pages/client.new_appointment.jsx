@@ -40,6 +40,7 @@ class NewAppointmentPage extends React.PureComponent {
         });
 
         let data;
+        // eslint-disable-next-line
         switch(event.target.name) {
             case "city":
                 data = await fetchService.getData(`/clinics/${event.target.value}/streets`);
