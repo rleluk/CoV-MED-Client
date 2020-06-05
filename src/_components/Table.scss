@@ -1,9 +1,9 @@
 table {
     border-collapse: collapse;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     th, td {
-        border: 1px solid #000;
+        border: 1px solid #bfbfbf;
         padding: 8px 30px;
         text-align: center;
     }
@@ -19,6 +19,6 @@ table {
     th {
         padding-top: 12px;
         padding-bottom: 12px;
-        background-color: #ccc;
+        background-color: #d4d4d4;
     }
 }

@@ -2,6 +2,8 @@ import React from "react";
 import "./Table.scss";
 
 export class Table extends React.PureComponent {
+
+
     createTable() {
         const { headers, rows } = this.props;
 

@@ -2,6 +2,8 @@ import React from "react";
 import jsPDF from "jspdf";
 import { Table } from "../_components/Table";
 import { Header } from "../_components/Header";
+import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
 
 class ExaminationHistory extends React.PureComponent {
     constructor(props) {
@@ -56,10 +58,10 @@ class ExaminationHistory extends React.PureComponent {
         data.forEach(element => {
             let row = [];
             const date = new Date(element.date);
-            const referralButton =  <button className="save-button" 
-                onClick={() => this.createPdf(this.parseReferral(element.refferal), "skierowanie.pdf")}> Pobierz </button>;
-            const prescriptionButton = <button className="save-button" 
-                onClick={() => this.createPdf(this.parsePrescription(element.prescription), "recepta.pdf")}> Pobierz </button>;
+            const referralButton =  <Button color="primary" onClick={() =>
+                            this.createPdf(this.parseReferral(element.refferal), "skierowanie.pdf")}> Pobierz </Button>;
+            const prescriptionButton = <Button color="primary"
+                onClick={() => this.createPdf(this.parsePrescription(element.prescription), "recepta.pdf")}> Pobierz </Button>;
 
             row.push(element.doctor.firstName + " " + element.doctor.lastName);
             row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());

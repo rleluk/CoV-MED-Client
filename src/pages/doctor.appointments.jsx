@@ -4,6 +4,8 @@ import { Header } from "../_components/Header";
 import { withAlert } from "react-alert";
 import { fetchService } from "../_services/fetch.service";
 import { authenticationService } from "../_services/authentication.service";
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 class DoctorAppointmentsPage extends React.PureComponent {
     constructor(props) {
@@ -37,7 +39,8 @@ class DoctorAppointmentsPage extends React.PureComponent {
                 let row = [];
 
                 const date = new Date(visit.date);
-                const startButton = <button className="start-button" onClick={this.startVisit}> Rozpocznij </button>
+                const startButton = <Button color="primary" onClick={this.startVisit}> Rozpocznij </Button>
+
 
                 row.push(name);
                 row.push(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
