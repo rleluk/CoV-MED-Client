@@ -5,12 +5,14 @@ export const authenticationService = {
     checkAuthorization,
     redirectToHomepage,
     get userType () { return localStorage.getItem("userType"); },
-    get authToken () { return localStorage.getItem("authToken"); }
+    get authToken () { return localStorage.getItem("authToken"); },
+    get userName () { return localStorage.getItem("userName"); }
 };
 
 function logout () {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userType');
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("userName");
     history.push("/");
 }
 

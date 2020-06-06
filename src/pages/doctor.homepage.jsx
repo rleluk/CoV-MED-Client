@@ -20,6 +20,7 @@ export class DoctorHomePage extends React.PureComponent {
                 <SideMenu urls={urls}/>
                 <div className="content-with-margin">
                     <div className="page-header"> Panel doktora </div>
+                    <div className="logged-as"> Zalogowany jako: { authenticationService.userName } </div>
                 </div>
             </div>
         );

@@ -58,6 +58,19 @@ form {
 }
 
 .content-with-margin {
+    .status-info {
+        margin-top: 60px;
+        align-self: center;
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+    .logged-as {
+        margin: 60px 0 0 50px;
+        font-weight: 500;
+        font-size: 27px;
+    }
+
     margin: 100px 0 0 20%;
     display: flex;
     flex-direction: column;

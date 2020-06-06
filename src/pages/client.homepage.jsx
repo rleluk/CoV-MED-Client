@@ -18,13 +18,14 @@ class ClientHomePage extends React.PureComponent {
         urls["Odbyj e-wizytę"] = {
             action: () => this.props.alert.show("Brak implementacji odbywania wizyt", { type: "error" })
         }
-
+        console.log(authenticationService.userName)
         return (
             <div>
                 <Header buttons={buttons}/>
                 <SideMenu urls={urls}/>
                 <div className="content-with-margin">
                     <div className="page-header"> Panel pacjenta </div>
+                    <div className="logged-as"> Zalogowany jako: { authenticationService.userName } </div>
                 </div>
             </div>
         );

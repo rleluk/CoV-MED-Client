@@ -47,8 +47,9 @@ class SignInPage extends React.PureComponent {
                 switch(res.status) {
                     case 200:
                         const json = await res.json();
-                        localStorage.setItem('authToken', json.token);
-                        localStorage.setItem('userType', json.userType);
+                        localStorage.setItem("authToken", json.token);
+                        localStorage.setItem("userType", json.userType);
+                        localStorage.setItem("userName", json.firstName + " " + json.lastName);
                         authenticationService.redirectToHomepage(json.userType);
                         break;
                     case 400:

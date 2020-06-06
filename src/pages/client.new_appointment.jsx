@@ -22,7 +22,8 @@ class NewAppointmentPage extends React.PureComponent {
             service: "",
             doctor: "",
             date: "",
-            time: ""
+            time: "",
+            active: null
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -30,8 +31,9 @@ class NewAppointmentPage extends React.PureComponent {
     }
 
     async componentDidMount() {
-        let data = await fetchService.getData("/clinics/cities");
-        this.setState({ cities: data });
+        let statusData = await fetchService.getData("/clients/status");
+        let citiesData = await fetchService.getData("/clinics/cities");
+        await this.setState({ cities: citiesData, active: statusData.active });
     }
 
     async handleChange(event) {
@@ -130,33 +132,37 @@ class NewAppointmentPage extends React.PureComponent {
     }
 
     render() {
-        const { cities, streets, services, doctors, times } = this.state;
-
         const buttons = {
             "Panel pacjenta": { url: "/client/homepage" },
             Wyloguj: { action: authenticationService.logout }
         }
-
+        
         const urls = URL.client;
         urls["Odbyj e-wizytę"] = {
             url: null,
             action: () => this.props.alert.show("Brak implementacji odbywania wizyt", { type: "error" })
         }
+        
+        const { active } = this.state;
 
-        let cityOptions = [], streetOptions = [], serviceOptions = [], doctorOptions = [], timeOptions = [];
-        this.updateOptions(cities, cityOptions);
-        this.updateOptions(streets, streetOptions);
-        this.updateOptions(services, serviceOptions);
-        this.updateOptions(times, timeOptions);
-
-        if(doctors) {
-            if(doctors.length === 0) 
-                doctorOptions.push(<option key={"empty" + doctors} hidden disabled selected value> --- </option>);
-            else {
-                doctorOptions.push(<option key={"null" + doctors} hidden disabled selected value> Wybierz </option>);
-                doctors.forEach(element => { 
-                    doctorOptions.push(<option key={element} value={element.email}> {element.firstName + " " + element.lastName} </option>);
-                })
+        if(active === true) {
+            const { cities, streets, services, doctors, times } = this.state;
+            var cityOptions = [], streetOptions = [], serviceOptions = [], doctorOptions = [], timeOptions = [];
+    
+            this.updateOptions(cities, cityOptions);
+            this.updateOptions(streets, streetOptions);
+            this.updateOptions(services, serviceOptions);
+            this.updateOptions(times, timeOptions);
+    
+            if(doctors) {
+                if(doctors.length === 0) 
+                    doctorOptions.push(<option key={"empty" + doctors} hidden disabled selected value> --- </option>);
+                else {
+                    doctorOptions.push(<option key={"null" + doctors} hidden disabled selected value> Wybierz </option>);
+                    doctors.forEach(element => { 
+                        doctorOptions.push(<option key={element} value={element.email}> {element.firstName + " " + element.lastName} </option>);
+                    })
+                }
             }
         }
 
@@ -166,43 +172,49 @@ class NewAppointmentPage extends React.PureComponent {
                 <SideMenu urls={urls}/>
                 <div className="content-with-margin">
                     <div className="page-header"> Umów wizytę </div>
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="label-input">
-                            <label> Miasto: </label>
-                            <select id="select-city" name="city" required onChange={this.handleChange}>
-                                {cityOptions}
-                            </select>
-                        </div>
-                        <div className="label-input">
-                            <label> Placówka: </label>
-                            <select id="select-street" name="street" required onChange={this.handleChange}>
-                                {streetOptions}
-                            </select>
-                        </div>
-                        <div className="label-input">
-                            <label> Usługa: </label>
-                            <select id="select-service" name="service" required onChange={this.handleChange}>
-                                {serviceOptions}
-                            </select>
-                        </div>
-                        <div className="label-input">
-                            <label> Lekarz: </label>
-                            <select id="select-doctor" name="doctor" required onChange={this.handleChange}>
-                                {doctorOptions}
-                            </select>
-                        </div>
-                        <div className="label-input">
-                            <label> Data: </label>
-                            <input type='date' name='date' required onChange={this.handleChange}/>
-                        </div>
-                        <div className="label-input">
-                            <label> Godzina: </label>
-                            <select name="time" required onChange={this.handleChange}>
-                                {timeOptions}
-                            </select>
-                        </div>
-                        <Button variant="contained" type='submit' style={{marginLeft:180}}> Umów wizytę </Button>
-                    </form>    
+                    { active === true ? (
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="label-input">
+                                <label> Miasto: </label>
+                                <select id="select-city" name="city" required onChange={this.handleChange}>
+                                    {cityOptions}
+                                </select>
+                            </div>
+                            <div className="label-input">
+                                <label> Placówka: </label>
+                                <select id="select-street" name="street" required onChange={this.handleChange}>
+                                    {streetOptions}
+                                </select>
+                            </div>
+                            <div className="label-input">
+                                <label> Usługa: </label>
+                                <select id="select-service" name="service" required onChange={this.handleChange}>
+                                    {serviceOptions}
+                                </select>
+                            </div>
+                            <div className="label-input">
+                                <label> Lekarz: </label>
+                                <select id="select-doctor" name="doctor" required onChange={this.handleChange}>
+                                    {doctorOptions}
+                                </select>
+                            </div>
+                            <div className="label-input">
+                                <label> Data: </label>
+                                <input type='date' name='date' required onChange={this.handleChange}/>
+                            </div>
+                            <div className="label-input">
+                                <label> Godzina: </label>
+                                <select name="time" required onChange={this.handleChange}>
+                                    {timeOptions}
+                                </select>
+                            </div>
+                            <Button variant="contained" type='submit' style={{marginLeft:180}}> Umów wizytę </Button>
+                        </form>    
+                    ) : ( active === null ? (
+                        <div className="status-info"> Ładuję dane... </div>
+                    ) : (
+                        <div className="status-info"> Twoje konto nie zostało jeszcze aktywowane. </div>
+                    ))}
                 </div>
             </div>
         );
