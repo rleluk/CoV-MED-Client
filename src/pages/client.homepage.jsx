@@ -18,7 +18,7 @@ class ClientHomePage extends React.PureComponent {
         urls["Odbyj e-wizytę"] = {
             action: () => this.props.alert.show("Brak implementacji odbywania wizyt", { type: "error" })
         }
-        console.log(authenticationService.userName)
+        
         return (
             <div>
                 <Header buttons={buttons}/>
